@@ -1,3 +1,7 @@
+# Melbourne  
+[![Build Status](https://travis-ci.org/project-australia/Melbourne.svg?branch=master)](https://travis-ci.org/project-australia/Melbourne)
+[![Ebert](https://ebertapp.io/github/project-australia/Melbourne.svg)](https://ebertapp.io/github/project-australia/Melbourne)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
