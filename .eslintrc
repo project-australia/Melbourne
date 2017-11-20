@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true,
+    "commonjs": true,
+    "jest": true,
+    "worker": true
+  },
+  "rules": {
+    "semi": [2, "never"],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  },
+  "extends": ["standard"],
+  "plugins": [ "flowtype", "react" ]
+}
