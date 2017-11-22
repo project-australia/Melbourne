@@ -22,4 +22,3 @@ persistStore(store, {
     </Provider>
   ), document.getElementById('root'))
 })
-registerServiceWorker()
