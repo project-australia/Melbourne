@@ -1,6 +1,5 @@
 import {
-  GET_USER_INFO,
-  GET_USER_INVITATIONS
+  GET_USER_INFO
 } from './types'
 
 function fetchedUserInfo (payload) {
