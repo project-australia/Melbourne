@@ -1,12 +1,12 @@
 import {
   GET_USER_LOCAL_STORAGE,
-  GET_USER_INFO,
+  GET_USER_INFO
 } from './../../actions/user/types'
 import * as user from './reducers'
 
 const INITIAL_STATE = {
   user: {},
-  info: 'Init Mapping',
+  info: 'Init Mapping'
 }
 
 export default (state = INITIAL_STATE, action) => {

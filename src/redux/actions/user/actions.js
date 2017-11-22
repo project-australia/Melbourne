@@ -2,13 +2,13 @@ import axios from 'axios'
 
 import {
   GET_USER_INFO,
-  GET_USER_INVITATIONS,
+  GET_USER_INVITATIONS
 } from './types'
 
 function fetchedUserInfo(payload) {
   return {
     type: GET_USER_INFO,
-    payload,
+    payload
   }
 }
 

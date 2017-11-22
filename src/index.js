@@ -11,8 +11,8 @@ import App from './modules/App'
 
 persistStore(store, {
   whitelist: [
-    '',
-  ],
+    ''
+  ]
 }, () => {
   render((
     <Provider store={store}>
