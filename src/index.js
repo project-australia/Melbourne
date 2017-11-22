@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { persistStore, autoRehydrate } from 'redux-persist'
+import { persistStore } from 'redux-persist'
 
 import history from './config/utils/historyRouter'
 
