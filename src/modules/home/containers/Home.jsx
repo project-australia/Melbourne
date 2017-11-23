@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import {
-  fetchUser,
+  fetchUser
 } from './../../../redux/actions/user/actions'
 
 class Home extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.fetchUser()
   }
 
-  render() {
+  render () {
     return (
       <div>
         home {this.props.info} - {this.props.user.name}
@@ -23,13 +22,13 @@ class Home extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     info: state.user.info,
-    user: state.user.user,
+    user: state.user.user
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUser: () => dispatch(fetchUser()),
+    fetchUser: () => dispatch(fetchUser())
   }
 }
 
