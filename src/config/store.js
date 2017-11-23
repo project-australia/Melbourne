@@ -4,7 +4,7 @@ import multi from 'redux-multi'
 import { autoRehydrate } from 'redux-persist'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import rootReducer from './../../redux/'
+import rootReducer from './../redux/'
 
 const middleware = [thunk, multi]
 
