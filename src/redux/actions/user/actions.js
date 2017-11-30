@@ -2,15 +2,10 @@ import {
   GET_USER_INFO
 } from './types'
 
-function fetchedUserInfo (payload) {
-  return {
-    type: GET_USER_INFO,
-    payload
-  }
-}
+const createAction = (type, payload) => ({ type, payload })
 
 export function fetchUser () {
   return (dispatch) => {
-    dispatch(fetchedUserInfo({id: 1, name: 'User 1'}))
+    dispatch(createAction(GET_USER_INFO, {id: 1, name: 'User 1'}))
   }
 }

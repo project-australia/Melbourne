@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import If from './../../shared/components/helpers/If'
 
 import {
-  fetchUser
-} from './../../../redux/actions/user/actions'
+  signOut
+} from './../../../redux/actions/auth/actions'
 
 class Home extends Component {
-  componentDidMount () {
-    this.props.fetchUser()
-  }
-
   render () {
+    const { logged } = this.props
     return (
       <div>
-        home {this.props.info} - {this.props.user.name}
+        <h1>Home</h1><br /><br />
+        <If test={!logged}>
+          <Link className="btn btn-default" to="/login">Login</Link><br />
+        </If>
+        <If test={logged}>
+          <button onClick={this.props.signOut}>Logout</button><br />
+        </If>
+        <Link className="btn btn-default" to="/restricArea">RestrictArea</Link>
       </div>
     )
   }
@@ -21,14 +27,13 @@ class Home extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    info: state.user.info,
-    user: state.user.user
+    logged: state.auth.logged
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUser: () => dispatch(fetchUser())
+    signOut: () => dispatch(signOut())
   }
 }
 
