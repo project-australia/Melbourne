@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-class RestrictArea extends Component {
+import { home } from './../../../config/utils/routes'
+
+class RestrictedArea extends Component {
   render () {
     return (
       <div>
         Restrict Area - Only for authorized people<br /><br />
-        <Link className="btn btn-default" to="/">Home</Link>
+        <Link to={home}>Home</Link>
       </div>
     )
   }
 }
 
-export default RestrictArea
+export default RestrictedArea
