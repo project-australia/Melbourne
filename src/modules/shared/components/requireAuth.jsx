@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import history from './../../../config/utils/historyRouter'
-import { login } from './../../../config/utils/routes'
+import { LOGIN } from './../../../config/utils/routes'
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {
@@ -20,7 +20,7 @@ export default function (ComposedComponent) {
     }
 
     redirectNotLoggedIn = () => {
-      history.push(login)
+      history.push(LOGIN)
     }
 
     render () {

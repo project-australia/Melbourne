@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import If from './../../shared/components/helpers/If'
-import { restrictedArea, login } from './../../../config/utils/routes'
+import { RESTRICTED_AREA, LOGIN } from './../../../config/utils/routes'
 import {
   signOut
 } from './../../../redux/actions/auth/actions'
@@ -14,14 +14,14 @@ class Home extends Component {
     const { logged } = this.props
     return (
       <div>
-        <h1>Home</h1><br /><br />
+        <h1>HOME</h1><br /><br />
         <If test={!logged}>
-          <Link to={login}>Login</Link><br />
+          <Link to={LOGIN}>LOGIN</Link><br />
         </If>
         <If test={logged}>
           <button onClick={this.props.signOut}>Logout</button><br />
         </If>
-        <Link to={restrictedArea}>Restricted Area</Link>
+        <Link to={RESTRICTED_AREA}>Restricted Area</Link>
       </div>
     )
   }
