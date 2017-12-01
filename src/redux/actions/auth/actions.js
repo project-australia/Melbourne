@@ -17,7 +17,7 @@ export function resetPassword (email) {
   }
 }
 
-export function SignInOrSignUp (email, password) {
+export function signinSignup (email, password) {
   return (dispatch) => {
     firebase.auth().fetchProvidersForEmail(email)
       .then((providers) => {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import { Link } from 'react-router-dom'
 
 import {
@@ -22,7 +21,7 @@ class ForgotPassword extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { email } = this.state
-    this.props.createTeam(email)
+    this.props.resetPassword(email)
   }
 
   render () {
@@ -42,7 +41,7 @@ class ForgotPassword extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     logged: state.auth.logged
   }

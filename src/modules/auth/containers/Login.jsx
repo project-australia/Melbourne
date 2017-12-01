@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import history from './../../../config/utils/historyRouter'
 
-import { Link } from 'react-router-dom'
-
 import {
-  SignInOrSignUp
+  signinSignup
 } from './../../../redux/actions/auth/actions'
+import {
+  restrictedArea,
+  home,
+  forgotPassword
+} from './../../../config/utils/routes'
 
 class Login extends Component {
   state = {
@@ -16,7 +21,7 @@ class Login extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.logged) {
-      history.push('/restricArea')
+      history.push(restrictedArea)
     }
   }
 
@@ -28,10 +33,9 @@ class Login extends Component {
   }
 
   handleSubmit = (e) => {
-    const { email, password } = this.state
     e.preventDefault()
-    console.log('Submit', email, password)
-    this.props.SignInOrSignUp(email, password)
+    const { email, password } = this.state
+    this.props.signinSignup(email, password)
   }
 
   render () {
@@ -59,11 +63,15 @@ class Login extends Component {
             <button onClick={this.handleSubmit}> Sign Up </button>
           </div>
         </form>
-        <p><Link to="/">home</Link></p>
-        <p><Link to="/forgotPassword">Forgot your password?</Link></p>
+        <p><Link to={home}>home</Link></p>
+        <p><Link to={forgotPassword}>Forgot your password?</Link></p>
       </div>
     )
   }
+}
+
+Login.propTypes = {
+  logged: PropTypes.bool
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -74,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    SignInOrSignUp: (email, password) => dispatch(SignInOrSignUp(email, password))
+    signinSignup: (email, password) => dispatch(signinSignup(email, password))
   }
 }
 
