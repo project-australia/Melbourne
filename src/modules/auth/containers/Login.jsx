@@ -8,9 +8,9 @@ import {
   signinSignup
 } from './../../../redux/actions/auth/actions'
 import {
-  restrictedArea,
-  home,
-  forgotPassword
+  RESTRICTED_AREA,
+  HOME,
+  FORGOT_PASSWORD
 } from './../../../config/utils/routes'
 
 class Login extends Component {
@@ -21,7 +21,7 @@ class Login extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.logged) {
-      history.push(restrictedArea)
+      history.push(RESTRICTED_AREA)
     }
   }
 
@@ -63,8 +63,8 @@ class Login extends Component {
             <button onClick={this.handleSubmit}> Sign Up </button>
           </div>
         </form>
-        <p><Link to={home}>home</Link></p>
-        <p><Link to={forgotPassword}>Forgot your password?</Link></p>
+        <p><Link to={HOME}>HOME</Link></p>
+        <p><Link to={FORGOT_PASSWORD}>Forgot your password?</Link></p>
       </div>
     )
   }

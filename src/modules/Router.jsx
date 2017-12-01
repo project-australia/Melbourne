@@ -6,10 +6,10 @@ import RestrictedArea from './home/containers/RestrictedArea'
 import Login from './auth/containers/Login'
 
 import {
-  home,
-  login,
-  restrictedArea,
-  forgotPassword
+  HOME,
+  LOGIN,
+  RESTRICTED_AREA,
+  FORGOT_PASSWORD
 } from './../config/utils/routes'
 
 import ForgotPassword from './auth/containers/ForgotPassword'
@@ -18,10 +18,10 @@ import NoMatch from './shared/containers/NoMatch'
 
 const Router = props => (
   <Switch>
-    <Route exact path={home} component={Home} />
-    <Route exact path={login} component={Login} />
-    <Route exact path={forgotPassword} component={ForgotPassword} />
-    <Route exact path={restrictedArea} component={requireAuth(RestrictedArea)} />
+    <Route exact path={HOME} component={Home} />
+    <Route exact path={LOGIN} component={Login} />
+    <Route exact path={FORGOT_PASSWORD} component={ForgotPassword} />
+    <Route exact path={RESTRICTED_AREA} component={requireAuth(RestrictedArea)} />
     <Route component={NoMatch} />
   </Switch>
 )

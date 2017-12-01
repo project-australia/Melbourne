@@ -6,6 +6,8 @@ import {
   resetPassword
 } from './../../../redux/actions/auth/actions'
 
+import { HOME } from './../../../config/utils/routes'
+
 class ForgotPassword extends Component {
   state = {
     email: ''
@@ -35,7 +37,7 @@ class ForgotPassword extends Component {
             <button onClick={this.handleSubmit}>Submit</button>
           </div>
         </form>
-        <p><Link to="/">home</Link></p>
+        <p><Link to={HOME}>HOME</Link></p>
       </div>
     )
   }
