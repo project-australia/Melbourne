@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import SectionCentered from './../../shared/components/grid/SectionCentered'
 import If from './../../shared/components/helpers/If'
 import { RESTRICTED_AREA, LOGIN } from './../../../config/utils/routes'
 import {
@@ -13,7 +14,7 @@ class Home extends Component {
   render () {
     const { logged } = this.props
     return (
-      <div>
+      <SectionCentered>
         <h1>HOME</h1><br /><br />
         <If test={!logged}>
           <Link to={LOGIN}>LOGIN</Link><br />
@@ -22,7 +23,7 @@ class Home extends Component {
           <button onClick={this.props.signOut}>Logout</button><br />
         </If>
         <Link to={RESTRICTED_AREA}>Restricted Area</Link>
-      </div>
+      </SectionCentered>
     )
   }
 }
