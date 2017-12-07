@@ -1,12 +1,14 @@
 import React from 'react'
 import SectionCentered from './../grid/SectionCentered'
 
-const Footer = (props) => {
+const SocialBar = (props) => {
   return (
     <SectionCentered>
-      <span>Ballard Book Footer</span>
+      <div>
+        <span>SocialBar</span>
+      </div>
     </SectionCentered>
   )
 }
 
-export default Footer
+export default SocialBar
