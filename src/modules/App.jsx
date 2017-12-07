@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import SocialBar from './shared/components/layout/SocialBar'
 import Header from './shared/components/layout/Header'
 import Footer from './shared/components/layout/Footer'
 import Router from './Router'
@@ -13,6 +14,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
+          <SocialBar />
           <Header />
           <Router />
           <Footer />
