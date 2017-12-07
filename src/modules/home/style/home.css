@@ -1,0 +1,37 @@
+.home-section-1 {
+  display: flex;
+  position:relative;
+}
+
+.img-library {
+  max-width: 100%;
+  vertical-align: middle;
+  z-index: 1;
+  position:absolute;
+}
+
+.img-man {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.layer-img {
+  margin: 48px 0 0 0;
+  float: left;
+  z-index: 3;
+  position:absolute;
+  left: 20%;
+}
+
+.search-isbn {
+  margin: 140px 0 0 0;
+  float: right;
+  z-index: 3;
+  position: absolute;
+  right: 18%;
+}
+@media only screen and (max-device-width: 480px) {
+  .home-section-1 {
+    display: none;
+  }
+}

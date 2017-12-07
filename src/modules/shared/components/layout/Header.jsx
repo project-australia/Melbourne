@@ -10,6 +10,7 @@ import {
   signOut
 } from './../../../../redux/actions/auth/actions'
 
+import { navBar } from './../../style/headerStyle'
 import './../../style/header.css'
 
 class Header extends Component {
@@ -20,6 +21,7 @@ class Header extends Component {
           title='Ballard Book'
           className='nav-main'
           showMenuIconButton={false}
+          style={navBar}
         />
       </SectionFullWidth>
     )
