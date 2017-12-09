@@ -12,8 +12,9 @@ import {
   FORGOT_PASSWORD
 } from './../config/utils/routes'
 
+import requireAuth from './shared/components/auth/requireAuth'
+
 import ForgotPassword from './auth/containers/ForgotPassword'
-import requireAuth from './shared/components/requireAuth'
 import NoMatch from './shared/containers/NoMatch'
 
 const Router = props => (
