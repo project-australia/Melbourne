@@ -1,7 +1,7 @@
 import React from 'react'
 import SectionCentered from './../grid/SectionCentered'
 
-import './../../style/social.css'
+import './../../style/social.scss'
 
 const SocialBar = (props) => {
   return (

@@ -11,6 +11,7 @@ import {
 } from './../../../redux/actions/auth/actions'
 
 import './../style/home.css'
+
 import img from './../../../assets/img/bg-home.jpg'
 import img2 from './../../../assets/img/layer-1.png'
 

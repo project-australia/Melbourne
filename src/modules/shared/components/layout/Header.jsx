@@ -11,6 +11,7 @@ import {
 } from './../../../../redux/actions/auth/actions'
 
 import { navBar } from './../../style/headerStyle'
+
 import './../../style/header.css'
 
 class Header extends Component {
