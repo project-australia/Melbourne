@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import history from './../../../config/utils/historyRouter'
-import { LOGIN } from './../../../config/utils/routes'
+import history from './../../../../config/utils/historyRouter'
+import { LOGIN } from './../../../../config/utils/routes'
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {
