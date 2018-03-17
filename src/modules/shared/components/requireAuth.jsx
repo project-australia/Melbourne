@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import history from './../../../../config/utils/historyRouter'
-import { LOGIN } from './../../../../config/utils/routes'
+import history from './../../../config/historyRouter'
+import { LOGIN } from './../../../config/constants/routes'
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {
@@ -14,7 +14,7 @@ export default function (ComposedComponent) {
     }
 
     componentWillReceiveProps (nextProps) {
-      if (!this.props.logged) {
+      if (!nextProps.logged) {
         this.redirectNotLoggedIn()
       }
     }

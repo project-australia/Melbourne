@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import FeaturedBooks from './../components/FeaturedBooks'
-import RecentlyAddedBooks from './../components/RecentlyAddedBooks'
-import SectionFullWidth from './../../shared/components/grid/SectionFullWidth'
 import SectionCentered from './../../shared/components/grid/SectionCentered'
-import FullBanner from './../components/FullBanner'
 
 import {
   signOut
@@ -17,13 +13,9 @@ import './../style/home.css'
 class Home extends Component {
   render () {
     return (
-      <SectionFullWidth>
-        <FullBanner />
-        <SectionCentered>
-          <RecentlyAddedBooks books={[]} />
-          <FeaturedBooks books={[]} />
-        </SectionCentered>
-      </SectionFullWidth>
+      <SectionCentered>
+        <h1>Home Page</h1>
+      </SectionCentered>
     )
   }
 }

@@ -1,17 +1,23 @@
-import { applyMiddleware, createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import multi from 'redux-multi'
-import { autoRehydrate } from 'redux-persist'
+import { persistStore, persistReducer } from 'redux-persist'
 import { composeWithDevTools } from 'redux-devtools-extension'
+
+import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './../redux/'
 
 const middleware = [thunk, multi]
 
-const store = createStore(
-  rootReducer,
-  undefined,
-  composeWithDevTools(applyMiddleware(...middleware), autoRehydrate())
-)
+const persistConfig = {
+  key: 'root',
+  storage
+}
 
-export default store
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(...middleware)))
+const persistor = persistStore(store)
+
+export default { store, persistor }

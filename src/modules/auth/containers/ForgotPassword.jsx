@@ -6,7 +6,7 @@ import {
   resetPassword
 } from './../../../redux/actions/auth/actions'
 
-import { HOME } from './../../../config/utils/routes'
+import { HOME } from './../../../config/constants/routes'
 
 class ForgotPassword extends Component {
   state = {

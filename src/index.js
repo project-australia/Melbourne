@@ -2,23 +2,18 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import history from './config/historyRouter'
 
-import history from './config/utils/historyRouter'
-
-import store from './config/store'
+import Store from './config/store'
 import App from './modules/App'
 
-persistStore(store, {
-  whitelist: [
-    ''
-  ]
-}, () => {
-  render((
-    <Provider store={store}>
+render((
+  <Provider store={Store.store}>
+    <PersistGate loading={null} persistor={Store.persistor}>
       <Router history={history}>
         <App />
       </Router>
-    </Provider>
-  ), document.getElementById('root'))
-})
+    </PersistGate>
+  </Provider>
+), document.getElementById('root'))

@@ -1,25 +1,27 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
-import SocialBar from './shared/components/layout/SocialBar'
-import Header from './shared/components/layout/Header'
-import Footer from './shared/components/layout/Footer'
 import Router from './Router'
+import ReduxToastr from 'react-redux-toastr'
+
+import Header from './shared/components/layout/Header'
 
 import './shared/style/app.css'
-import 'normalize.css'
+import 'semantic-ui-css/semantic.min.css'
 
 class App extends Component {
   render () {
     return (
-      <MuiThemeProvider>
-        <div>
-          <SocialBar />
-          <Header />
-          <Router />
-          <Footer />
-        </div>
-      </MuiThemeProvider>
+      <div>
+        <Header />
+        <Router />
+        <ReduxToastr
+          timeOut={4000}
+          newestOnTop={false}
+          preventDuplicates
+          position="top-left"
+          transitionIn="fadeIn"
+          transitionOut="fadeOut"
+          progressBar/>
+      </div>
     )
   }
 }

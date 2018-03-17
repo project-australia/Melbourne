@@ -2,29 +2,21 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { AppBar } from 'material-ui'
+import SectionCentered from './../grid/SectionCentered'
+import LoggedMenu from './header/LoggedMenu'
 
-import SectionFullWidth from './../grid/SectionFullWidth'
-
-import {
-  signOut
-} from './../../../../redux/actions/auth/actions'
-
-import { navBar } from './../../style/headerStyle'
+import { signOut } from './../../../../redux/actions/auth/actions'
 
 import './../../style/header.css'
 
 class Header extends Component {
+  logOff = () => this.props.signOut()
   render () {
+    const { logged } = this.props
     return (
-      <SectionFullWidth>
-        <AppBar
-          title='Ballard Book'
-          className='nav-main'
-          showMenuIconButton={false}
-          style={navBar}
-        />
-      </SectionFullWidth>
+      <SectionCentered>
+        {logged && <LoggedMenu logoutFunc={this.logOff} />}
+      </SectionCentered>
     )
   }
 }

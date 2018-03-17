@@ -1,0 +1,33 @@
+.pd-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  div {
+    flex-basis: 24.5%;
+    margin-top: 5px;
+  }
+}
+
+.pd-column-1 {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  * {
+    flex: 1;
+  }
+}
+
+.pd-column-2 {
+  background-color: yellowgreen;
+}
+
+.pd-column-3 {
+  background-color: forestgreen;
+}
+
+.pd-column-4 {
+  background-color: tomato;
+}

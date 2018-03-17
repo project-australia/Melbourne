@@ -1,14 +1,12 @@
 import React from 'react'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Grid } from 'semantic-ui-react'
 
 const SectionFullWidth = (props) => {
   return (
-    <Grid fluid>
-      <Row>
-        <Col xs={12} md={12}>
-          {props.children}
-        </Col>
-      </Row>
+    <Grid>
+      <Grid.Column mobile={16} tablet={16} computer={16}>
+        {props.children}
+      </Grid.Column>
     </Grid>
   )
 }
