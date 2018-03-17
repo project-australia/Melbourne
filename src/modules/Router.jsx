@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import Home from './home/containers/Home'
-import Dashboard from './dash/containers/Dashboard'
+import Dashboard from './admin/containers/Dashboard'
 import RestrictedArea from './home/containers/RestrictedArea'
 import Login from './auth/containers/Login'
 

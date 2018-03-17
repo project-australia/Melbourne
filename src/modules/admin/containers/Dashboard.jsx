@@ -3,19 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
-import ProductivityColumns from '../components/ProductivityColumns'
 
-import {
-  signOut
-} from './../../../redux/actions/auth/actions'
-
-import './../style/dashboard.css'
+import './style/dashboard.css'
 
 class Dashboard extends Component {
   render () {
     return (
       <SectionCentered>
-        <ProductivityColumns />
+        <div>
+          <p>Dashboard</p>
+        </div>
       </SectionCentered>
     )
   }
@@ -31,10 +28,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signOut: () => dispatch(signOut())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps)(Dashboard)
