@@ -12,7 +12,7 @@ import {
   DASHBOARD,
   RESTRICTED_AREA,
   FORGOT_PASSWORD
-} from './../config/constants/routes'
+} from './../config/constants/appRoutes'
 
 import ForgotPassword from './auth/containers/ForgotPassword'
 import requireAuth from './shared/components/requireAuth'

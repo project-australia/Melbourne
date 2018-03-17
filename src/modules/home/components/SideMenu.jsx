@@ -7,7 +7,7 @@ import { Col } from 'react-flexbox-grid'
 import CreateNewFolder from 'material-ui/svg-icons/file/create-new-folder'
 
 import history from './../../../config/utils/historyRouter'
-import { NOVEL } from './../../../config/utils/routes'
+import { NOVEL } from './../../../config/utils/appRoutes'
 
 import './../style/MenuLeft.css'
 

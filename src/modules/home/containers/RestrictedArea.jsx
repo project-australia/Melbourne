@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import { HOME } from './../../../config/constants/routes'
+import { HOME } from './../../../config/constants/appRoutes'
 
 class RestrictedArea extends Component {
   render () {

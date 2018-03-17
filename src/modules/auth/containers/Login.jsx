@@ -11,7 +11,7 @@ import {
 
 import {
   HOME
-} from './../../../config/constants/routes'
+} from './../../../config/constants/appRoutes'
 
 import LoginForm from '../components/LoginForm'
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import history from './../../../config/historyRouter'
-import { LOGIN } from './../../../config/constants/routes'
+import { LOGIN } from './../../../config/constants/appRoutes'
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {
