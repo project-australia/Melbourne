@@ -17,10 +17,12 @@
   "dependencies": {
     "firebase": "^4.6.2",
     "mdi-react": "^3.0.0",
+    "moment": "^2.21.0",
     "node-sass-chokidar": "^0.0.3",
     "prop-types": "^15.6.0",
     "re-base": "^3.2.0",
     "react": "^16.2.0",
+    "react-datepicker": "^1.2.2",
     "react-dom": "^16.2.0",
     "react-infinite-slide": "^0.1.2",
     "react-redux": "^5.0.6",

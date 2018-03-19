@@ -6,6 +6,8 @@ import Header from './shared/components/layout/Header'
 
 import './shared/style/app.css'
 import 'semantic-ui-css/semantic.min.css'
+import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
 class App extends Component {
   render () {
