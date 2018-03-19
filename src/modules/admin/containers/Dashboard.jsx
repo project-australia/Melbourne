@@ -12,6 +12,7 @@ class Dashboard extends Component {
       <SectionCentered>
         <div>
           <p>Dashboard</p>
+          {this.props.match.url}
         </div>
       </SectionCentered>
     )

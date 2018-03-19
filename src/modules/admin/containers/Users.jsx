@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { AccountIcon } from 'mdi-react'
 import { connect } from 'react-redux'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
+import UsersFilter from './../components/UsersFilter'
 
 class Users extends Component {
   render () {
     return (
       <SectionCentered>
         <div>
-          <p>Header</p>
+          <AccountIcon size={40} />
+          <h1>Users</h1>
         </div>
-        <div>
-          <p>Filter</p>
-        </div>
+        <UsersFilter />
         <div>
           <p>Table</p>
         </div>
