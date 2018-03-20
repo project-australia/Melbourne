@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Pagination, Menu, Button, Icon } from 'semantic-ui-react'
 
+import ConfirmationModal from '../../shared/components/modals/ConfirmationModal'
 import './style/UsersContent.css'
 
 class UsersContent extends Component {
@@ -11,9 +12,14 @@ class UsersContent extends Component {
     showEllipsis: true,
     showFirstAndLastNav: true,
     showPreviousAndNextNav: true,
-    totalPages: 50
+    totalPages: 50,
+    openModal: false
   }
+
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
+
+  toggleModal = () => this.setState((state, props) => ({ openModal: !state.openModal }))
+
   render () {
     const {
       activePage,
@@ -22,10 +28,17 @@ class UsersContent extends Component {
       showEllipsis,
       showFirstAndLastNav,
       showPreviousAndNextNav,
-      totalPages
+      totalPages,
+      openModal
     } = this.state
     return (
       <div className="uc-wrapper">
+        <ConfirmationModal
+          openModal={openModal}
+          toggleModal={this.toggleModal}
+          title="Delete User Account"
+          content="Are you Sure ? This action cannot be undone."
+        />
         <div className="uc-table">
           <Table striped>
             <Table.Header>
@@ -52,7 +65,7 @@ class UsersContent extends Component {
                     <Button icon>
                       <Icon name='eye' />
                     </Button>
-                    <Button icon>
+                    <Button onClick={this.toggleModal} icon>
                       <Icon name='trash' />
                     </Button>
                   </div>
