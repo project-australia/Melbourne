@@ -1,26 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { AccountIcon } from 'mdi-react'
 import { connect } from 'react-redux'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
+import CommonHeader from './../components/CommonHeader'
 import UsersFilter from './../components/UsersFilter'
+import UsersContent from '../components/UsersContent'
 
 class Users extends Component {
   render () {
     return (
       <SectionCentered>
-        <div>
-          <AccountIcon size={40} />
-          <h1>Users</h1>
-        </div>
+        <CommonHeader
+          iconName="user"
+          title="Users"
+        />
         <UsersFilter />
-        <div>
-          <p>Table</p>
-        </div>
-        <div>
-          <p>Pagination</p>
-        </div>
+        <UsersContent />
       </SectionCentered>
     )
   }

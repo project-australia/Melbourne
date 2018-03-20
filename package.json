@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "firebase": "^4.6.2",
-    "mdi-react": "^3.0.0",
     "moment": "^2.21.0",
     "node-sass-chokidar": "^0.0.3",
     "prop-types": "^15.6.0",
