@@ -1,18 +1,23 @@
 .uf-wrapper {
   display: flex;
   flex-direction: row;
-  align-content: flex-start;
   max-width: 100%;
   * {
     margin-right: 2px;
   }
+  margin-bottom: 30px;
 }
 .uf-datepicker-box {
-  flex: 0.1;
+  flex: 0.6;
+  display: flex;
+  align-items: center;
 }
 .uf-input-box {
   flex: 1;
 }
 .uf-button-box {
   flex: 1;
+}
+.ui.label.uf-label {
+  font-size: 1.12rem;
 }

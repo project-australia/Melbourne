@@ -8,12 +8,12 @@ const CommonHeader = props => {
   return (
     <div className="ch-wrapper">
       <Icon name={props.iconName} size="big" />
-      <span>{props.title}</span>
+      <span className="ch-title">{props.title}</span>
     </div>
   )
 }
 
-CommonHeader.prototype = {
+CommonHeader.propTypes = {
   iconName: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired
 }

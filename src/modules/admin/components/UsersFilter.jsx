@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Button } from 'semantic-ui-react'
+import { Input, Button, Icon, Label } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 
@@ -18,7 +18,10 @@ class UsersFilter extends Component {
   render () {
     return (
       <div className="uf-wrapper">
-        <div className="uf-datepicker-box">
+        {/* <div className="uf-datepicker-box">
+          <Label className="uf-label">
+            <Icon name='calendar outline' /> Start Date
+          </Label>
           <DatePicker
             selected={this.state.startDate}
             onChange={this.handleStartDate}
@@ -26,14 +29,17 @@ class UsersFilter extends Component {
           />
         </div>
         <div className="uf-datepicker-box">
+          <Label className="uf-label">
+            <Icon name='calendar outline' /> End Date
+          </Label>
           <DatePicker
             selected={this.state.endDate}
             onChange={this.handleEndDate}
             className="input-date-picker"
           />
-        </div>
+        </div> */}
         <div className="uf-input-box">
-          <Input fluid placeholder='Nº Order, Users emails, Payment Id ' />
+          <Input fluid placeholder='Name, Email, Telephone or School ' />
         </div>
         <div className="uf-button-box">
           <Button content='SEARCH' onClick={() => console.log('clicked')} />

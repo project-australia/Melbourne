@@ -1,4 +1,9 @@
 .uc-wrapper {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.uc-actions {
+  float: right;
 }
