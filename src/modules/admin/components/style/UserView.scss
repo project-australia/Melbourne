@@ -7,10 +7,14 @@
   flex: 1;
   display: flex;
   align-items: stretch;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.4);
+  margin-bottom: 15px;
   span.uv-label {
-    flex-basis: 20%;
+    flex-basis: 25%;
+    font-size: 14px;
   }
   span.uv-info {
-    flex-basis: 50%;
+    flex-basis: 70%;
+    font-size: 14px;
   }
 }
