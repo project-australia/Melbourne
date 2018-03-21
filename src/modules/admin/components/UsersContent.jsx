@@ -3,6 +3,7 @@ import { Table, Pagination, Menu, Button, Icon } from 'semantic-ui-react'
 
 import ConfirmationModal from '../../shared/components/modals/ConfirmationModal'
 import UserView from './UserView'
+import UserEdit from './UserEdit'
 
 import './style/UsersContent.css'
 
@@ -16,13 +17,15 @@ class UsersContent extends Component {
     showPreviousAndNextNav: true,
     totalPages: 50,
     openModal: false,
-    userViewModal: false
+    userViewModal: false,
+    userEditModal: false
   }
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
 
   toggleModal = () => this.setState((state, props) => ({ openModal: !state.openModal }))
   toggleUserViewModal = () => this.setState((state, props) => ({ userViewModal: !state.userViewModal }))
+  toggleUserEditModal = () => this.setState((state, props) => ({ userEditModal: !state.userEditModal }))
 
   render () {
     const {
@@ -34,7 +37,8 @@ class UsersContent extends Component {
       showPreviousAndNextNav,
       totalPages,
       openModal,
-      userViewModal
+      userViewModal,
+      userEditModal
     } = this.state
     return (
       <div className="uc-wrapper">
@@ -48,6 +52,10 @@ class UsersContent extends Component {
         <UserView
           openModal={userViewModal}
           toggleModal={this.toggleUserViewModal}
+        />
+        <UserEdit
+          openModal={userEditModal}
+          toggleModal={this.toggleUserEditModal}
         />
         <div className="uc-table">
           <Table striped>
@@ -69,7 +77,7 @@ class UsersContent extends Component {
                 <Table.Cell>None</Table.Cell>
                 <Table.Cell>
                   <div className="uc-actions">
-                    <Button icon>
+                    <Button onClick={this.toggleUserEditModal} icon>
                       <Icon name='pencil' />
                     </Button>
                     <Button onClick={this.toggleUserViewModal} icon>

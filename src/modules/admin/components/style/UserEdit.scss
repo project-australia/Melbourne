@@ -1,0 +1,12 @@
+.ue-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.ue-item {
+  flex: 1;
+  display: flex;
+  * {
+    flex: 1;
+  }
+}
