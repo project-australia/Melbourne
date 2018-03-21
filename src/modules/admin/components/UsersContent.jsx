@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Table, Pagination, Menu, Button, Icon } from 'semantic-ui-react'
 
 import ConfirmationModal from '../../shared/components/modals/ConfirmationModal'
+import UserView from './UserView'
+
 import './style/UsersContent.css'
 
 class UsersContent extends Component {
@@ -13,12 +15,14 @@ class UsersContent extends Component {
     showFirstAndLastNav: true,
     showPreviousAndNextNav: true,
     totalPages: 50,
-    openModal: false
+    openModal: false,
+    userViewModal: false
   }
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
 
   toggleModal = () => this.setState((state, props) => ({ openModal: !state.openModal }))
+  toggleUserViewModal = () => this.setState((state, props) => ({ userViewModal: !state.userViewModal }))
 
   render () {
     const {
@@ -29,15 +33,21 @@ class UsersContent extends Component {
       showFirstAndLastNav,
       showPreviousAndNextNav,
       totalPages,
-      openModal
+      openModal,
+      userViewModal
     } = this.state
     return (
       <div className="uc-wrapper">
         <ConfirmationModal
           openModal={openModal}
           toggleModal={this.toggleModal}
+          confirmAction={() => console.log('confirm delete user')}
           title="Delete User Account"
           content="Are you Sure ? This action cannot be undone."
+        />
+        <UserView
+          openModal={userViewModal}
+          toggleModal={this.toggleUserViewModal}
         />
         <div className="uc-table">
           <Table striped>
@@ -62,7 +72,7 @@ class UsersContent extends Component {
                     <Button icon>
                       <Icon name='pencil' />
                     </Button>
-                    <Button icon>
+                    <Button onClick={this.toggleUserViewModal} icon>
                       <Icon name='eye' />
                     </Button>
                     <Button onClick={this.toggleModal} icon>

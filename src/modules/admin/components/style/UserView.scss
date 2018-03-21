@@ -1,0 +1,16 @@
+.uv-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.uv-group-info {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  span.uv-label {
+    flex-basis: 20%;
+  }
+  span.uv-info {
+    flex-basis: 50%;
+  }
+}

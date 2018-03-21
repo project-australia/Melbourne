@@ -8,6 +8,7 @@ import UsersFilter from './../components/UsersFilter'
 import UsersContent from '../components/UsersContent'
 
 class Users extends Component {
+  searchUsers = searchParam => console.log('search users', searchParam)
   render () {
     return (
       <SectionCentered>
@@ -15,7 +16,9 @@ class Users extends Component {
           iconName="user"
           title="Users"
         />
-        <UsersFilter />
+        <UsersFilter
+          searchFunction={this.searchUsers}
+        />
         <UsersContent />
       </SectionCentered>
     )

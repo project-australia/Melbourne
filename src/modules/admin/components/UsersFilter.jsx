@@ -1,52 +1,40 @@
 import React, { Component } from 'react'
-import { Input, Button, Icon, Label } from 'semantic-ui-react'
-import DatePicker from 'react-datepicker'
-import moment from 'moment'
+import PropTypes from 'prop-types'
+import { Input, Button } from 'semantic-ui-react'
 
 import './style/UsersFilter.css'
 
 class UsersFilter extends Component {
   state = {
-    startDate: moment(),
-    endDate: moment()
+    value: ''
   }
 
-  handleStartDate = date => this.setState({startDate: date})
-
-  handleEndDate = date => this.setState({endDate: date})
+  handleInputChange = event => this.setState({ value: event.target.value })
 
   render () {
     return (
       <div className="uf-wrapper">
-        {/* <div className="uf-datepicker-box">
-          <Label className="uf-label">
-            <Icon name='calendar outline' /> Start Date
-          </Label>
-          <DatePicker
-            selected={this.state.startDate}
-            onChange={this.handleStartDate}
-            className="input-date-picker"
-          />
-        </div>
-        <div className="uf-datepicker-box">
-          <Label className="uf-label">
-            <Icon name='calendar outline' /> End Date
-          </Label>
-          <DatePicker
-            selected={this.state.endDate}
-            onChange={this.handleEndDate}
-            className="input-date-picker"
-          />
-        </div> */}
         <div className="uf-input-box">
-          <Input fluid placeholder='Name, Email, Telephone or School ' />
+          <Input
+            value={this.state.value}
+            onChange={event => this.handleInputChange(event)}
+            fluid
+            placeholder="Name, Email, Telephone or School"
+          />
         </div>
         <div className="uf-button-box">
-          <Button content='SEARCH' onClick={() => console.log('clicked')} />
+          <Button
+            content='SEARCH'
+            onClick={() => this.props.searchFunction(this.state.value)}
+          />
         </div>
       </div>
     )
   }
+}
+
+UsersFilter.propTypes = {
+  searchFunction: PropTypes.func.isRequired
 }
 
 export default UsersFilter
