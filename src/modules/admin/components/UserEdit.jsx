@@ -12,15 +12,23 @@ class UserEdit extends Component {
     birthDate: '',
     telephone: '',
     school: '',
-    wallet: {
-      ballance: ''
-    },
-    paypalAccount: ''
+    ballance: '',
+    paypalAccount: '',
+    requestStatus: '',
+    state: '',
+    city: '',
+    zipCode: '',
+    street: '',
+    referredBy: ''
   }
   handleRoleChange = (e, { value }) => this.setState({ role: value })
   handleClubChange = (e, { value }) => this.setState({ clue: value })
+  handleRequestStatusChange = (e, { value }) => this.setState({ requestStatus: value })
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value })
-  handleInputWalletChange = (e) => this.setState({ wallet: {ballance: e.target.value} })
+  walletStatusOptions = () => [
+    { key: 'NONE', value: 'NONE', text: 'NONE' },
+    { key: 'PENDING', value: 'PENDING', text: 'PENDING' }
+  ]
   clubOptions = () => [
     { key: 'NONE', value: 'NONE', text: 'NONE' },
     { key: 'TWENTY', value: 'TWENTY', text: 'ELITE CLUB' }
@@ -116,6 +124,7 @@ class UserEdit extends Component {
               </span>
             </div>
           </div>
+
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
@@ -131,17 +140,18 @@ class UserEdit extends Component {
               </span>
             </div>
           </div>
+
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
-                Wallet
+                 Wallet Ballance
               </span>
               <span className="ue-info">
                 <Input
-                  name='wallet'
-                  onChange={this.handleInputWalletChange}
+                  name='ballance'
+                  onChange={this.handleInputChange}
                   fluid
-                  value={this.state.wallet.ballance}
+                  value={this.state.ballance}
                   placeholder='Wallet Ballance' />
               </span>
             </div>
@@ -158,6 +168,97 @@ class UserEdit extends Component {
                   fluid
                   value={this.state.paypalAccount}
                   placeholder='Paypal Account' />
+              </span>
+            </div>
+          </div>
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Request Status
+              </span>
+              <span className="ue-info">
+                <Dropdown
+                  placeholder="Select Request Status"
+                  onChange={this.handleRequestStatusChange}
+                  selection
+                  value={this.state.requestStatus}
+                  options={this.walletStatusOptions()} />
+              </span>
+            </div>
+          </div>
+
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Street
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='street'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.street}
+                  placeholder='Street' />
+              </span>
+            </div>
+          </div>
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                City
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='city'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.city}
+                  placeholder='City' />
+              </span>
+            </div>
+          </div>
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                State
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='state'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.state}
+                  placeholder='State' />
+              </span>
+            </div>
+          </div>
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Zipcode
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='zipCode'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.zipCode}
+                  placeholder='ZipCode' />
+              </span>
+            </div>
+          </div>
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Rep's email
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='referredBy'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.referredBy}
+                  placeholder="Rep's email" />
               </span>
             </div>
           </div>

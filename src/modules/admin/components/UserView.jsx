@@ -10,7 +10,7 @@ const UserView = props => {
       size='tiny'
       open={props.openModal}
       onClose={props.toggleModal}
-      style={{marginTop: '10%', margin: '10% auto'}}
+      style={{marginTop: '5%', margin: '5% auto'}}
     >
       <Modal.Header>
         Fulano's profile
@@ -66,7 +66,15 @@ const UserView = props => {
             <span className="uv-info">Faesa</span>
           </div>
           <div className="uv-group-info">
-            <span className="uv-label">Wallet</span>
+            <span className="uv-label">Ballance</span>
+            <span className="uv-info">Faesa</span>
+          </div>
+          <div className="uv-group-info">
+            <span className="uv-label">Request Withdraw</span>
+            <span className="uv-info">Faesa</span>
+          </div>
+          <div className="uv-group-info">
+            <span className="uv-label">Rep's email</span>
             <span className="uv-info">Faesa</span>
           </div>
         </div>
