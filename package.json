@@ -15,6 +15,7 @@
     "production": "http-server ./build/"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "firebase": "^4.6.2",
     "moment": "^2.21.0",
     "node-sass-chokidar": "^0.0.3",

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import history from './config/historyRouter'
 
+import './config/axiosConfig'
+
 import Store from './config/store'
 import App from './modules/App'
 
