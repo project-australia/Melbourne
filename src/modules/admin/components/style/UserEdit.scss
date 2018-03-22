@@ -6,7 +6,12 @@
 .ue-item {
   flex: 1;
   display: flex;
-  * {
-    flex: 1;
+  span.ue-label {
+    flex-basis: 30%;
+    font-size: 14px;
+  }
+  span.ue-info {
+    flex-basis: 70%;
+    font-size: 14px;
   }
 }
