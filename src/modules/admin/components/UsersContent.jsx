@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Table, Pagination, Menu, Button, Icon } from 'semantic-ui-react'
 
 import ConfirmationModal from '../../shared/components/modals/ConfirmationModal'
@@ -18,14 +19,15 @@ class UsersContent extends Component {
     totalPages: 50,
     openModal: false,
     userViewModal: false,
-    userEditModal: false
+    userEditModal: false,
+    userId: ''
   }
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
 
-  toggleModal = () => this.setState((state, props) => ({ openModal: !state.openModal }))
-  toggleUserViewModal = () => this.setState((state, props) => ({ userViewModal: !state.userViewModal }))
-  toggleUserEditModal = () => this.setState((state, props) => ({ userEditModal: !state.userEditModal }))
+  toggleModal = (userId) => this.setState((state, props) => ({ openModal: !state.openModal, userId }))
+  toggleUserViewModal = (userId) => this.setState((state, props) => ({ userViewModal: !state.userViewModal, userId }))
+  toggleUserEditModal = (userId) => this.setState((state, props) => ({ userEditModal: !state.userEditModal, userId }))
 
   render () {
     const {
@@ -40,12 +42,13 @@ class UsersContent extends Component {
       userViewModal,
       userEditModal
     } = this.state
+    const { listItems } = this.props
     return (
       <div className="uc-wrapper">
         <ConfirmationModal
           openModal={openModal}
           toggleModal={this.toggleModal}
-          confirmAction={() => console.log('confirm delete user')}
+          confirmAction={() => this.props.deleteItem(this.state.userId)}
           title="Delete User Account"
           content="Are you Sure ? This action cannot be undone."
         />
@@ -70,43 +73,31 @@ class UsersContent extends Component {
             </Table.Header>
 
             <Table.Body>
-              <Table.Row>
-                <Table.Cell>John Lilki</Table.Cell>
-                <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-                <Table.Cell>202-555-0143</Table.Cell>
-                <Table.Cell>None</Table.Cell>
-                <Table.Cell>
-                  <div className="uc-actions">
-                    <Button onClick={this.toggleUserEditModal} icon>
-                      <Icon name='pencil' />
-                    </Button>
-                    <Button onClick={this.toggleUserViewModal} icon>
-                      <Icon name='eye' />
-                    </Button>
-                    <Button onClick={this.toggleModal} icon>
-                      <Icon name='trash' />
-                    </Button>
-                  </div>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>John Lilki</Table.Cell>
-                <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-                <Table.Cell>202-555-0143</Table.Cell>
-                <Table.Cell>None</Table.Cell>
-                <Table.Cell className="uc-actions">
-                  <Button icon>
-                    <Icon name='pencil' />
-                  </Button>
-                  <Button icon>
-                    <Icon name='eye' />
-                  </Button>
-                  <Button icon>
-                    <Icon name='trash' />
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
+              {listItems.map(user => {
+                return (
+                  <Table.Row key={user.id}>
+                    <Table.Cell>John Lilki</Table.Cell>
+                    <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
+                    <Table.Cell>202-555-0143</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>
+                      <div className="uc-actions">
+                        <Button onClick={this.toggleUserEditModal} icon>
+                          <Icon name='pencil' />
+                        </Button>
+                        <Button onClick={this.toggleUserViewModal} icon>
+                          <Icon name='eye' />
+                        </Button>
+                        <Button onClick={() => this.toggleModal(user.id)} icon>
+                          <Icon name='trash' />
+                        </Button>
+                      </div>
+                    </Table.Cell>
+                  </Table.Row>
+                )
+              })}
             </Table.Body>
+
             <Table.Footer>
               <Table.Row>
                 <Table.HeaderCell colSpan='5'>
@@ -135,6 +126,13 @@ class UsersContent extends Component {
       </div>
     )
   }
+}
+
+UsersContent.propTypess = {
+  listItems: PropTypes.array.isRequired,
+  updateItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  viewItem: PropTypes.func.isRequired
 }
 
 export default UsersContent

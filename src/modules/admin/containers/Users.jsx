@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { getAllUsers } from './../../../services/backend/userService'
+import { getAllUsers, updateUser, deteleUser, findUserById, searchUsers } from './../../../services/backend/userService'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
 import CommonHeader from './../components/CommonHeader'
@@ -10,11 +10,37 @@ import UsersFilter from './../components/UsersFilter'
 import UsersContent from '../components/UsersContent'
 
 class Users extends Component {
-  componentDidMount () {
-    getAllUsers().then(res => console.log('res', res))
+  state = {
+    usersList: []
   }
-  searchUsers = searchParam => console.log('search users', searchParam)
+
+  componentDidMount () {
+    this.getAllItems()
+  }
+
+  searchUsers = async searchParam => {
+    const usersList = await searchUsers(searchParam)
+    this.setState({usersList})
+  }
+
+  getAllItems = async () => {
+    const users = await getAllUsers()
+    this.setState({ usersList: users })
+  }
+
+  updateItem = async item => {
+    await updateUser(item)
+    this.getAllItems()
+  }
+
+  deleteItem = async item => {
+    console.log('deleted', item)
+    await deteleUser(item)
+    this.getAllItems()
+  }
+
   render () {
+    const { usersList } = this.state
     return (
       <SectionCentered>
         <CommonHeader
@@ -24,7 +50,12 @@ class Users extends Component {
         <UsersFilter
           searchFunction={this.searchUsers}
         />
-        <UsersContent />
+        <UsersContent
+          listItems={usersList}
+          updateItem={this.updateItem}
+          deleteItem={this.deleteItem}
+          viewItem={findUserById}
+        />
       </SectionCentered>
     )
   }
