@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { getAllUsers, updateUser, deteleUser, findUserById, searchUsers } from './../../../services/backend/userService'
+import { getAllUsers, updateUser, findUserById, searchUsers } from './../../../services/backend/userService'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
 import CommonHeader from './../components/CommonHeader'
@@ -33,12 +33,6 @@ class Users extends Component {
     this.getAllItems()
   }
 
-  deleteItem = async item => {
-    console.log('deleted', item)
-    await deteleUser(item)
-    this.getAllItems()
-  }
-
   render () {
     const { usersList } = this.state
     return (
@@ -53,7 +47,6 @@ class Users extends Component {
         <UsersContent
           listItems={usersList}
           updateItem={this.updateItem}
-          deleteItem={this.deleteItem}
           viewItem={findUserById}
         />
       </SectionCentered>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Table, Pagination, Menu, Button, Icon } from 'semantic-ui-react'
 
-import ConfirmationModal from '../../shared/components/modals/ConfirmationModal'
 import UserView from './UserView'
 import UserEdit from './UserEdit'
 
@@ -20,15 +19,17 @@ class UsersContent extends Component {
     openModal: false,
     userViewModal: false,
     userEditModal: false,
-    userId: ''
+    user: {}
   }
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
 
-  toggleModal = (userId) => this.setState((state, props) => ({ openModal: !state.openModal, userId }))
-  toggleUserViewModal = (userId) => this.setState((state, props) => ({ userViewModal: !state.userViewModal, userId }))
-  toggleUserEditModal = (userId) => this.setState((state, props) => ({ userEditModal: !state.userEditModal, userId }))
-
+  toggleModal = (user) => this.setState((state, props) => ({ openModal: !state.openModal, user }))
+  toggleUserViewModal = (user) => this.setState((state, props) => ({ userViewModal: !state.userViewModal, user }))
+  toggleUserEditModal = (user) => this.setState((state, props) => ({ userEditModal: !state.userEditModal, user }))
+  clubName = (club) => {
+    return club === 'TWENTY' ? 'ELITE CLUB' : club
+  }
   render () {
     const {
       activePage,
@@ -38,27 +39,23 @@ class UsersContent extends Component {
       showFirstAndLastNav,
       showPreviousAndNextNav,
       totalPages,
-      openModal,
       userViewModal,
       userEditModal
     } = this.state
     const { listItems } = this.props
     return (
       <div className="uc-wrapper">
-        <ConfirmationModal
-          openModal={openModal}
-          toggleModal={this.toggleModal}
-          confirmAction={() => this.props.deleteItem(this.state.userId)}
-          title="Delete User Account"
-          content="Are you Sure ? This action cannot be undone."
-        />
+
         <UserView
           openModal={userViewModal}
           toggleModal={this.toggleUserViewModal}
+          item={this.state.user}
         />
         <UserEdit
           openModal={userEditModal}
           toggleModal={this.toggleUserEditModal}
+          updateFunction={this.props.updateItem}
+          item={this.state.user}
         />
         <div className="uc-table">
           <Table striped>
@@ -77,19 +74,16 @@ class UsersContent extends Component {
                 return (
                   <Table.Row key={user.id}>
                     <Table.Cell>{user.name}</Table.Cell>
-                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{user.email}</Table.Cell>
                     <Table.Cell>{user.telephone}</Table.Cell>
-                    <Table.Cell>{user.club}</Table.Cell>
+                    <Table.Cell>{this.clubName(user.club)}</Table.Cell>
                     <Table.Cell>
                       <div className="uc-actions">
-                        <Button onClick={this.toggleUserEditModal} icon>
+                        <Button onClick={() => this.toggleUserEditModal(user)} icon>
                           <Icon name='pencil' />
                         </Button>
-                        <Button onClick={this.toggleUserViewModal} icon>
+                        <Button onClick={() => this.toggleUserViewModal(user)} icon>
                           <Icon name='eye' />
-                        </Button>
-                        <Button onClick={() => this.toggleModal(user.id)} icon>
-                          <Icon name='trash' />
                         </Button>
                       </div>
                     </Table.Cell>
@@ -110,7 +104,6 @@ class UsersContent extends Component {
                       size='mini'
                       siblingRange={siblingRange}
                       totalPages={totalPages}
-                      // Heads up! All items are powered by shorthands, if you want to hide one of them, just pass `null` as value
                       ellipsisItem={showEllipsis ? undefined : null}
                       firstItem={showFirstAndLastNav ? undefined : null}
                       lastItem={showFirstAndLastNav ? undefined : null}
@@ -131,7 +124,6 @@ class UsersContent extends Component {
 UsersContent.propTypess = {
   listItems: PropTypes.array.isRequired,
   updateItem: PropTypes.func.isRequired,
-  deleteItem: PropTypes.func.isRequired,
   viewItem: PropTypes.func.isRequired
 }
 

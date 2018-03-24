@@ -6,6 +6,7 @@ import './style/UserEdit.css'
 
 class UserEdit extends Component {
   state = {
+    id: '',
     role: '',
     name: '',
     email: '',
@@ -21,8 +22,39 @@ class UserEdit extends Component {
     street: '',
     referredBy: ''
   }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.item && nextProps.item.email) {
+      this.fillInputs(nextProps.item)
+    }
+  }
+  fillInputs = (user) => {
+    this.setState({
+      id: user.id,
+      role: user.role,
+      name: user.name,
+      email: user.email,
+      birthDate: user.birthDate || '',
+      telephone: user.telephone || '',
+      school: user.school || '',
+      ballance: user.wallet.ballance || '',
+      paypalAccount: user.wallet.paypalAccount || '',
+      requestStatus: user.wallet.status,
+      state: user.address.state || '',
+      city: user.address.city || '',
+      zipCode: user.address.zipCode || '',
+      street: user.address.street || '',
+      referredBy: user.referredBy || '',
+      club: user.club || ''
+    })
+  }
+
+  updateItem = () => {
+    this.props.updateFunction(this.state)
+    this.props.toggleModal()
+  }
   handleRoleChange = (e, { value }) => this.setState({ role: value })
-  handleClubChange = (e, { value }) => this.setState({ clue: value })
+  handleClubChange = (e, { value }) => this.setState({ club: value })
   handleRequestStatusChange = (e, { value }) => this.setState({ requestStatus: value })
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value })
   walletStatusOptions = () => [
@@ -47,24 +79,9 @@ class UserEdit extends Component {
         style={{marginTop: '5%', margin: '5% auto'}}
       >
         <Modal.Header>
-          Fulano's profile
+          Edit Profile
         </Modal.Header>
         <Modal.Content>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Role
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Role"
-                  onChange={this.handleRoleChange}
-                  selection
-                  value={this.state.role}
-                  options={this.roleOptions()} />
-              </span>
-            </div>
-          </div>
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
@@ -73,6 +90,7 @@ class UserEdit extends Component {
               <span className="ue-info">
                 <Input
                   name='name'
+                  value={this.state.name}
                   disabled
                   fluid
                   placeholder='Name' />
@@ -87,6 +105,7 @@ class UserEdit extends Component {
               <span className="ue-info">
                 <Input
                   name='email'
+                  value={this.state.email}
                   disabled
                   fluid
                   placeholder='Email' />
@@ -262,6 +281,21 @@ class UserEdit extends Component {
               </span>
             </div>
           </div>
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Role
+              </span>
+              <span className="ue-info">
+                <Dropdown
+                  placeholder="Select Role"
+                  onChange={this.handleRoleChange}
+                  selection
+                  value={this.state.role}
+                  options={this.roleOptions()} />
+              </span>
+            </div>
+          </div>
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={this.props.toggleModal} negative content="Cancel" />
@@ -270,7 +304,7 @@ class UserEdit extends Component {
             icon='checkmark'
             labelPosition='right'
             content='Save'
-            onClick={this.props.toggleModal}/>
+            onClick={() => this.updateItem()}/>
         </Modal.Actions>
       </Modal>
     )
@@ -279,7 +313,12 @@ class UserEdit extends Component {
 
 UserEdit.propTypes = {
   toggleModal: PropTypes.func.isRequired,
-  openModal: PropTypes.bool.isRequired
+  openModal: PropTypes.bool.isRequired,
+  item: PropTypes.object.isRequired
+}
+
+UserEdit.defaultProps = {
+  item: {}
 }
 
 export default UserEdit

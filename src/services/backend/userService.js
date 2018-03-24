@@ -9,19 +9,28 @@ export const getAllUsers = async () => {
   }
 }
 
-export const updateUser = async () => {
-  try {
-    const users = await axios.get('/posts')
-    return users.data
-  } catch (err) {
-    console.log('err user', err.message)
+export const updateUser = async (userToUpdate) => {
+  const { id, city, state, role, telephone, street, zipCode, club, requestStatus, ballance, referredBy, paypalAccount } = userToUpdate
+  const body = {
+    club,
+    role,
+    telephone,
+    referredBy,
+    address: {
+      zipCode,
+      city,
+      state,
+      street
+    },
+    wallet: {
+      status: requestStatus,
+      ballance,
+      paypalAccount
+    }
   }
-}
-
-export const deteleUser = async () => {
   try {
-    const users = await axios.get('/posts')
-    return users.data
+    const user = await axios.put(`/users/${id}/profile`, body)
+    return user.data
   } catch (err) {
     console.log('err user', err.message)
   }
