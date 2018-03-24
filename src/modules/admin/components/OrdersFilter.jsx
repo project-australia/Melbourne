@@ -39,7 +39,7 @@ class OrdersFilter extends Component {
           />
         </div>
         <div className="uf-input-box">
-          <Input fluid placeholder='Name, Email, Telephone or School ' />
+          <Input fluid placeholder='Order Number, Users email' />
         </div>
         <div className="uf-button-box">
           <Button content='SEARCH' onClick={() => console.log('clicked')} />
