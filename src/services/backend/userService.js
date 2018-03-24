@@ -45,9 +45,9 @@ export const findUserById = async () => {
   }
 }
 
-export const searchUsers = async () => {
+export const searchUsers = async (searchParam) => {
   try {
-    const users = await axios.get('/posts')
+    const users = await axios.get(`/users/search?searchParam=${searchParam}`)
     return users.data
   } catch (err) {
     console.log('err user', err.message)

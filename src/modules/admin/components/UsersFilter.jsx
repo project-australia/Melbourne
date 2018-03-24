@@ -19,7 +19,7 @@ class UsersFilter extends Component {
             value={this.state.value}
             onChange={event => this.handleInputChange(event)}
             fluid
-            placeholder="Name, Email, Telephone or School"
+            placeholder="Name, Email or School"
           />
         </div>
         <div className="uf-button-box">
