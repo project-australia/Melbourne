@@ -76,10 +76,10 @@ class UsersContent extends Component {
               {listItems.map(user => {
                 return (
                   <Table.Row key={user.id}>
-                    <Table.Cell>John Lilki</Table.Cell>
-                    <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-                    <Table.Cell>202-555-0143</Table.Cell>
-                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{user.telephone}</Table.Cell>
+                    <Table.Cell>{user.club}</Table.Cell>
                     <Table.Cell>
                       <div className="uc-actions">
                         <Button onClick={this.toggleUserEditModal} icon>

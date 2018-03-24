@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const getAllUsers = async () => {
   try {
-    const users = await axios.get('/posts')
+    const users = await axios.get('/users')
     return users.data
   } catch (err) {
     console.log('err user', err.message)
