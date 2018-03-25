@@ -8,7 +8,8 @@ import './style/UsersFilter.css'
 class OrdersFilter extends Component {
   state = {
     startDate: moment(),
-    endDate: moment()
+    endDate: moment(),
+    value: ''
   }
 
   handleStartDate = date => this.setState({startDate: date})
@@ -18,7 +19,7 @@ class OrdersFilter extends Component {
   render () {
     return (
       <div className="uf-wrapper">
-        <div className="uf-datepicker-box">
+        {/* <div className="uf-datepicker-box">
           <Label className="uf-label">
             <Icon name='calendar outline' /> Start Date
           </Label>
@@ -37,7 +38,7 @@ class OrdersFilter extends Component {
             onChange={this.handleEndDate}
             className="input-date-picker"
           />
-        </div>
+        </div> */}
         <div className="uf-input-box">
           <Input fluid placeholder='Order Number, Users email' />
         </div>

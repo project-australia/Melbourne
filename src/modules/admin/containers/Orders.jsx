@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { getAllOrders, updateUser, findUserById, searchOrders } from './../../../services/backend/Orderservice'
+import { getAllOrders, updateOrder, findOrderById, searchOrders } from './../../../services/backend/orderService'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
 import CommonHeader from './../components/CommonHeader'
@@ -29,7 +29,7 @@ class Orders extends Component {
   }
 
   updateItem = async item => {
-    await updateUser(item)
+    await updateOrder(item)
     this.getAllItems()
   }
 
@@ -47,7 +47,7 @@ class Orders extends Component {
         <OrdersContent
           listItems={itemList}
           updateItem={this.updateItem}
-          viewItem={findUserById}
+          viewItem={findOrderById}
         />
       </SectionCentered>
     )

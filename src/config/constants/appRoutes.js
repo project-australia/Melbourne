@@ -6,3 +6,5 @@ export const NOVEL = '/novel'
 
 export const ADM_DASHBOARD = '/admin/dashboard'
 export const ADM_USERS = '/admin/users'
+export const ADM_ORDERS = '/admin/orders'
+export const ADM_BOOKS = '/admin/books'
