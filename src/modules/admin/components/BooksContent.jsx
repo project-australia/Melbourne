@@ -61,7 +61,8 @@ class UsersContent extends Component {
               <Table.Row>
                 <Table.HeaderCell>Book Id</Table.HeaderCell>
                 <Table.HeaderCell>Title</Table.HeaderCell>
-                <Table.HeaderCell>Price</Table.HeaderCell>
+                <Table.HeaderCell>Price - Buy</Table.HeaderCell>
+                <Table.HeaderCell>Price - Rent</Table.HeaderCell>
                 <Table.HeaderCell>Status</Table.HeaderCell>
                 <Table.HeaderCell>Featured</Table.HeaderCell>
                 <Table.HeaderCell textAlign='right'>Actions</Table.HeaderCell>
@@ -74,14 +75,10 @@ class UsersContent extends Component {
                   <Table.Row key={book.id}>
                     <Table.Cell>{book.id}</Table.Cell>
                     <Table.Cell>{book.title}</Table.Cell>
-                    <Table.Cell>
-                      <span>
-                      buy: ${book.prices.buy || 'Not set'}<br />
-                      rent: ${book.prices.rent || 'Not set'}
-                      </span>
-                    </Table.Cell>
+                    <Table.Cell>$ {book.prices.buy || 'not set'}</Table.Cell>
+                    <Table.Cell>$ {book.prices.rent || 'not set'}</Table.Cell>
                     <Table.Cell>{book.status}</Table.Cell>
-                    <Table.Cell>{book.featured}</Table.Cell>
+                    <Table.Cell>{book.featured ? 'YES' : 'NO'}</Table.Cell>
                     <Table.Cell>
                       <div className="uc-actions">
                         <Button onClick={() => this.toggleBookEditModal(book)} icon>
