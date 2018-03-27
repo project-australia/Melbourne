@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { getAllOrders, updateOrder, findOrderById, searchOrders } from './../../../services/backend/orderService'
+import { getAllBooks, findBookById, updateBook, searchBooks } from './../../../services/backend/bookService'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
 import CommonHeader from './../components/CommonHeader'
-import OrdersFilter from './../components/OrdersFilter'
-import OrdersContent from '../components/OrdersContent'
+import BooksFilter from './../components/BooksFilter'
+import BooksContent from '../components/BooksContent'
 
 class Books extends Component {
   state = {
@@ -18,18 +18,18 @@ class Books extends Component {
     this.getAllItems()
   }
 
-  searchOrders = async searchParam => {
-    const itemList = await searchOrders(searchParam)
+  searchItems = async searchParam => {
+    const itemList = await searchBooks(searchParam)
     this.setState({ itemList })
   }
 
   getAllItems = async () => {
-    const Orders = await getAllOrders()
-    this.setState({ itemList: Orders })
+    const itemList = await getAllBooks()
+    this.setState({ itemList })
   }
 
   updateItem = async item => {
-    await updateOrder(item)
+    await updateBook(item)
     this.getAllItems()
   }
 
@@ -38,16 +38,16 @@ class Books extends Component {
     return (
       <SectionCentered>
         <CommonHeader
-          iconName="user"
-          title="Orders"
+          iconName="book"
+          title="Books"
         />
-        <OrdersFilter
-          searchFunction={this.searchOrders}
+        <BooksFilter
+          searchFunction={this.searchItems}
         />
-        <OrdersContent
+        <BooksContent
           listItems={itemList}
           updateItem={this.updateItem}
-          viewItem={findOrderById}
+          viewItem={findBookById}
         />
       </SectionCentered>
     )
