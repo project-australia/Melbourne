@@ -19,12 +19,14 @@ import {
   ADM_ORDERS,
   RESTRICTED_AREA,
   FORGOT_PASSWORD,
-  ADM_BOOKS
+  ADM_BOOKS,
+  NOT_AUTHORIZED
 } from './../config/constants/appRoutes'
 
 import ForgotPassword from './auth/containers/ForgotPassword'
 import requireAuth from './shared/components/requireAuth'
 import NoMatch from './shared/containers/NoMatch'
+import NotAuthorized from './shared/containers/NotAuthorized'
 
 const Router = props => (
   <Switch>
@@ -34,9 +36,10 @@ const Router = props => (
     <Route exact path={ADM_DASHBOARD} component={AdminDashboard} />
     <Route path={ADM_USERS} component={AdminUsers} />
     <Route path={ADM_ORDERS} component={AdminOrders} />
-    <Route path={ADM_BOOKS} component={AdminBooks} />
+    <Route path={ADM_BOOKS} component={requireAuth(AdminBooks)} />
 
     <Route exact path={FORGOT_PASSWORD} component={ForgotPassword} />
+    <Route exact path={NOT_AUTHORIZED} component={NotAuthorized} />
     <Route exact path={RESTRICTED_AREA} component={requireAuth(RestrictedArea)} />
     <Route component={NoMatch} />
   </Switch>

@@ -6,6 +6,7 @@ import {
   USER_SET_PROFILE
 } from '../../types/UserTypes'
 
+import { findUserById } from '../../../services/backend/userService'
 import { setTokenAuth } from '../../../config/headers'
 import { handleMessage } from '../toastr/actions'
 
@@ -36,9 +37,10 @@ export function signinSignup (email, password) {
       })
       .then(async (user) => {
         await setTokenAuth(user.pa)
-        if (user && user.email) {
+        if (user && user.uid) {
+          const userProfile = await findUserById(user.uid)
           dispatch([
-            createAction(USER_SET_PROFILE, user),
+            createAction(USER_SET_PROFILE, userProfile),
             createAction(AUTH_LOGGED_STATUS, true),
             handleMessage('success', 'login', 'deu certo')
           ])
@@ -54,9 +56,15 @@ export function signOut () {
   return async (dispatch) => {
     try {
       await firebase.auth().signOut()
-      dispatch(createAction(AUTH_LOGGED_STATUS, false))
+      dispatch([
+        createAction(USER_SET_PROFILE, {}),
+        createAction(AUTH_LOGGED_STATUS, false)
+      ])
     } catch (error) {
-      dispatch(createAction(AUTH_LOGGED_STATUS, false))
+      dispatch([
+        createAction(USER_SET_PROFILE, {}),
+        createAction(AUTH_LOGGED_STATUS, false)
+      ])
     }
   }
 }

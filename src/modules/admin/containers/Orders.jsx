@@ -38,7 +38,7 @@ class Orders extends Component {
     return (
       <SectionCentered>
         <CommonHeader
-          iconName="user"
+          iconName="file text outline"
           title="Orders"
         />
         <OrdersFilter

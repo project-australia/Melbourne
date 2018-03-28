@@ -96,7 +96,7 @@ class UsersContent extends Component {
 
             <Table.Footer>
               <Table.Row>
-                <Table.HeaderCell colSpan='5'>
+                <Table.HeaderCell colSpan='7'>
                   <Menu floated='right' pagination>
                     <Pagination
                       className="uc-pagination"

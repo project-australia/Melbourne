@@ -6,7 +6,7 @@ import '../style/loginForm.css'
 
 class LoginForm extends Component {
   state = {
-    email: 'hebertporto@gmail.com',
+    email: 'eduardomoroni@gmail.com',
     password: '123456'
   }
 
@@ -29,7 +29,7 @@ class LoginForm extends Component {
       <Grid className="lf-wrapper" centered columns={1}>
         <Grid.Column mobile={15} tablet={10} computer={4}>
           <Container as='h2' textAlign='center'>
-            <span className='lf-title'>PRODUCTIVITY</span>
+            <span className='lf-title'>BALLARD BOOKS</span>
           </Container>
           <Form size='large'>
             <Segment piled>

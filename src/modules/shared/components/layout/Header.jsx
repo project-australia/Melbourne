@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import SectionCentered from './../grid/SectionCentered'
 import LoggedMenu from './header/LoggedMenu'
+import AdminMenu from './header/AdminMenu'
+import DefaultMenu from './header/DefaultMenu'
 
 import { signOut } from './../../../../redux/actions/auth/actions'
 
@@ -15,7 +17,9 @@ class Header extends Component {
     const { logged } = this.props
     return (
       <SectionCentered>
+        {!logged && <DefaultMenu />}
         {logged && <LoggedMenu logoutFunc={this.logOff} />}
+        {logged && <AdminMenu />}
       </SectionCentered>
     )
   }

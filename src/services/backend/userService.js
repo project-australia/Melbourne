@@ -36,10 +36,10 @@ export const updateUser = async (userToUpdate) => {
   }
 }
 
-export const findUserById = async () => {
+export const findUserById = async (userId) => {
   try {
-    const users = await axios.get('/posts')
-    return users.data
+    const user = await axios.get(`/users/${userId}/profile`)
+    return user.data
   } catch (err) {
     console.log('err user', err.message)
   }

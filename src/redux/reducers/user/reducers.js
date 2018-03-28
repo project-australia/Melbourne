@@ -1,3 +1,3 @@
 export function setUser (state, { payload }) {
-  return { ...state, user: payload }
+  return { ...state, profile: payload }
 }
