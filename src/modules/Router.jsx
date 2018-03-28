@@ -33,9 +33,9 @@ const Router = props => (
     <Route exact path={LOGIN} component={Login} />
     <Route exact path={HOME} component={Home} />
 
-    <Route exact path={ADM_DASHBOARD} component={AdminDashboard} />
-    <Route path={ADM_USERS} component={AdminUsers} />
-    <Route path={ADM_ORDERS} component={AdminOrders} />
+    <Route exact path={ADM_DASHBOARD} component={requireAuth(AdminDashboard)} />
+    <Route path={ADM_USERS} component={requireAuth(AdminUsers)} />
+    <Route path={ADM_ORDERS} component={requireAuth(AdminOrders)} />
     <Route path={ADM_BOOKS} component={requireAuth(AdminBooks)} />
 
     <Route exact path={FORGOT_PASSWORD} component={ForgotPassword} />

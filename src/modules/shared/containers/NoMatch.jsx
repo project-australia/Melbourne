@@ -1,10 +1,13 @@
 import React from 'react'
+import SectionCentered from '../components/grid/SectionCentered'
 
 const NoMatch = (props) => {
   return (
-    <div>
-      Not Found
-    </div>
+    <SectionCentered>
+      <h1>
+        Not Found
+      </h1>
+    </SectionCentered>
   )
 }
 

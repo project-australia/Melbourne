@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -37,7 +38,6 @@ export default function (ComposedComponent) {
 
     checkAuthorization = () => {
       const protecedRoutes = [ ADM_BOOKS, ADM_DASHBOARD, ADM_ORDERS, ADM_USERS ]
-      console.log('check rotas', protecedRoutes.indexOf(this.props.match.url) > -1)
       if (protecedRoutes.indexOf(this.props.match.url) > -1) {
         return this.props.role === 'ADMIN'
       }
@@ -45,7 +45,7 @@ export default function (ComposedComponent) {
     }
 
     render () {
-      return this.checkAuthorization() ? <ComposedComponent {...this.props} /> : this.redirectNotAuthorized()
+      return this.checkAuthorization() ? <ComposedComponent {...this.props} /> : <Redirect to={NOT_AUTHORIZED} push={true} />
     }
   }
 
