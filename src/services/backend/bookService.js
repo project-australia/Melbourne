@@ -18,9 +18,21 @@ export const findBookById = async () => {
   }
 }
 
-export const updateBook = async () => {
+export const updateBook = async (book) => {
+  const { id, priceBuy, priceSell, priceRent, status, about, condition, featured } = book
+  const body = {
+    status,
+    about,
+    condition,
+    featured,
+    prices: {
+      buy: priceBuy,
+      rent: priceRent,
+      sell: priceSell
+    }
+  }
   try {
-    const users = await axios.get('/posts')
+    const users = await axios.put(`/books/${id}`, body)
     return users.data
   } catch (err) {
     console.log('err user', err.message)

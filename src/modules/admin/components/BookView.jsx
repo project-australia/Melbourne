@@ -69,7 +69,7 @@ const BookView = props => {
             </div>
             <div className="bv-group-info">
               <span className="bv-label">Description</span>
-              <span className="bv-info">{item.description}</span>
+              <span className="bv-info">{item.about}</span>
             </div>
           </div>
 
