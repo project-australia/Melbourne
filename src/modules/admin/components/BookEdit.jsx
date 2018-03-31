@@ -7,45 +7,42 @@ import './style/UserEdit.css'
 class BookEdit extends Component {
   state = {
     id: '',
-    role: '',
-    name: '',
-    email: '',
-    birthDate: '',
-    telephone: '',
-    school: '',
-    ballance: '',
-    paypalAccount: '',
-    requestStatus: '',
-    state: '',
-    city: '',
-    zipCode: '',
-    street: '',
-    referredBy: ''
+    status: '',
+    about: '',
+    priceBuy: '',
+    priceSell: '',
+    priceRent: '',
+    condition: '',
+    featured: '',
+    title: '', // not editable
+    authors: [],
+    edition: '',
+    dimensions: {},
+    isbn: ''
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.item && nextProps.item.email) {
+    if (nextProps.item && nextProps.item.id) {
+      console.log('item', nextProps.item)
       this.fillInputs(nextProps.item)
     }
   }
-  fillInputs = (user) => {
+
+  fillInputs = (item) => {
     this.setState({
-      id: user.id,
-      role: user.role,
-      name: user.name,
-      email: user.email,
-      birthDate: user.birthDate || '',
-      telephone: user.telephone || '',
-      school: user.school || '',
-      ballance: user.wallet.ballance || '',
-      paypalAccount: user.wallet.paypalAccount || '',
-      requestStatus: user.wallet.status,
-      state: user.address.state || '',
-      city: user.address.city || '',
-      zipCode: user.address.zipCode || '',
-      street: user.address.street || '',
-      referredBy: user.referredBy || '',
-      club: user.club || ''
+      id: item.id,
+      status: item.status,
+      about: item.about || '',
+      priceBuy: item.prices.buy || '',
+      priceSell: item.prices.sell,
+      priceRent: item.prices.rent || '',
+      condition: item.condition,
+      featured: item.featured ? 'true' : 'false',
+      title: item.title, // not editable
+      authors: item.authors,
+      edition: item.edition || '',
+      dimensions: item.dimensions || '',
+      isbn: item.isbn
     })
   }
 
@@ -53,23 +50,32 @@ class BookEdit extends Component {
     this.props.updateFunction(this.state)
     this.props.toggleModal()
   }
-  handleRoleChange = (e, { value }) => this.setState({ role: value })
-  handleClubChange = (e, { value }) => this.setState({ club: value })
-  handleRequestStatusChange = (e, { value }) => this.setState({ requestStatus: value })
+
+  handleFeaturedChange = (e, { value }) => this.setState({ featured: value })
+  handleStatusChange = (e, { value }) => this.setState({ status: value })
+  handleConditionChange = (e, { value }) => this.setState({ condition: value })
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value })
-  walletStatusOptions = () => [
-    { key: 'NONE', value: 'NONE', text: 'NONE' },
-    { key: 'PENDING', value: 'PENDING', text: 'PENDING' }
+
+  featuredOptions = () => [
+    { key: 'false', value: 'false', text: 'NO' },
+    { key: 'true', value: 'true', text: 'YES' }
   ]
-  clubOptions = () => [
-    { key: 'NONE', value: 'NONE', text: 'NONE' },
-    { key: 'TWENTY', value: 'TWENTY', text: 'ELITE CLUB' }
+
+  statusOptions = () => [
+    { key: 'RENTED', value: 'RENTED', text: 'RENTED' },
+    { key: 'AVAILABLE', value: 'AVAILABLE', text: 'AVAILABLE' },
+    { key: 'SOLD', value: 'SOLD', text: 'SOLD' },
+    { key: 'UNAVAILABLE', value: 'UNAVAILABLE', text: 'UNAVAILABLE' }
   ]
-  roleOptions = () => [
-    { key: 'ADMIN', value: 'ADMIN', text: 'ADMIN' },
-    { key: 'REP', value: 'REP', text: 'REP' },
-    { key: 'USER', value: 'USER', text: 'USER' }
+
+  conditionOptions = () => [
+    { key: 'Used – Acceptable', value: 'Used – Acceptable', text: 'Used – Acceptable' },
+    { key: 'Used – Good', value: 'Used – Good', text: 'Used – Good' },
+    { key: 'Used – Very Good', value: 'Used – Very Good', text: 'Used – Very Good' },
+    { key: 'Used – Like New', value: 'Used – Like New', text: 'Used – Like New' },
+    { key: 'New', value: 'New', text: 'New' }
   ]
+
   render () {
     return (
       <Modal
@@ -79,67 +85,36 @@ class BookEdit extends Component {
         style={{marginTop: '5%', margin: '5% auto'}}
       >
         <Modal.Header>
-          Edit Profile
+          Edit Book
         </Modal.Header>
         <Modal.Content>
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
-                Name
+                Status
               </span>
               <span className="ue-info">
-                <Input
-                  name='name'
-                  value={this.state.name}
-                  disabled
-                  fluid
-                  placeholder='Name' />
+                <Dropdown
+                  placeholder="Select Status"
+                  onChange={this.handleStatusChange}
+                  value={this.state.status}
+                  selection
+                  options={this.statusOptions()} />
               </span>
             </div>
           </div>
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
-                Email
+                Description
               </span>
               <span className="ue-info">
                 <Input
-                  name='email'
-                  value={this.state.email}
-                  disabled
-                  fluid
-                  placeholder='Email' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Birthdate
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='birthDate'
-                  disabled
+                  name='about'
                   onChange={this.handleInputChange}
+                  value={this.state.about}
                   fluid
-                  value={this.state.birthDate}
-                  placeholder='Birthdate' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Telephone
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='telephone'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.telephone}
-                  placeholder='Telephone' />
+                  placeholder='Description' />
               </span>
             </div>
           </div>
@@ -147,15 +122,15 @@ class BookEdit extends Component {
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
-                Club
+                Price: Buy
               </span>
               <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Club"
-                  onChange={this.handleClubChange}
-                  selection
-                  value={this.state.club}
-                  options={this.clubOptions()} />
+                <Input
+                  name='priceBuy'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.priceBuy}
+                  placeholder='Buy Pricing' />
               </span>
             </div>
           </div>
@@ -163,45 +138,15 @@ class BookEdit extends Component {
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
-                 Wallet Ballance
+                Price: Sell
               </span>
               <span className="ue-info">
                 <Input
-                  name='ballance'
+                  name='priceSell'
                   onChange={this.handleInputChange}
                   fluid
-                  value={this.state.ballance}
-                  placeholder='Wallet Ballance' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Paypal Account
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='paypalAccount'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.paypalAccount}
-                  placeholder='Paypal Account' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Request Status
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Request Status"
-                  onChange={this.handleRequestStatusChange}
-                  selection
-                  value={this.state.requestStatus}
-                  options={this.walletStatusOptions()} />
+                  value={this.state.priceSell}
+                  placeholder='Sell Pricing' />
               </span>
             </div>
           </div>
@@ -209,93 +154,146 @@ class BookEdit extends Component {
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
-                Street
+                Price: Rent
               </span>
               <span className="ue-info">
                 <Input
-                  name='street'
+                  name='priceRent'
                   onChange={this.handleInputChange}
                   fluid
-                  value={this.state.street}
-                  placeholder='Street' />
+                  value={this.state.priceRent}
+                  placeholder='Rent Pricing' />
               </span>
             </div>
           </div>
+
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
-                City
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='city'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.city}
-                  placeholder='City' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                State
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='state'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.state}
-                  placeholder='State' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Zipcode
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='zipCode'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.zipCode}
-                  placeholder='ZipCode' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Rep's email
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='referredBy'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.referredBy}
-                  placeholder="Rep's email" />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Role
+              Condition
               </span>
               <span className="ue-info">
                 <Dropdown
-                  placeholder="Select Role"
-                  onChange={this.handleRoleChange}
+                  placeholder="Select Condition"
+                  onChange={this.handleConditionChange}
                   selection
-                  value={this.state.role}
-                  options={this.roleOptions()} />
+                  value={this.state.condition}
+                  options={this.conditionOptions()} />
               </span>
             </div>
           </div>
+
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Featured
+              </span>
+              <span className="ue-info">
+                <Dropdown
+                  placeholder="Select Featured"
+                  onChange={this.handleFeaturedChange}
+                  selection
+                  value={this.state.featured}
+                  options={this.featuredOptions()} />
+              </span>
+            </div>
+          </div>
+
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+              Title
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='title'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.title}
+                  disabled
+                  placeholder='title' />
+              </span>
+            </div>
+          </div>
+
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+              Authors
+              </span>
+              <span className="ue-info">
+                {this.state.authors.map(author => {
+                  return <Input
+                    key={author}
+                    fluid
+                    value={author
+                    }
+                    disabled />
+                })}
+              </span>
+            </div>
+          </div>
+
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                ISBN
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='isbn'
+                  onChange={this.handleInputChange}
+                  fluid
+                  disabled
+                  value={this.state.isbn}
+                  placeholder='Isbn' />
+              </span>
+            </div>
+          </div>
+
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+               Edition
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='edition'
+                  onChange={this.handleInputChange}
+                  fluid
+                  disabled
+                  value={this.state.edition}
+                  placeholder='Edition' />
+              </span>
+            </div>
+          </div>
+
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Dimensions
+              </span>
+              <span className="ue-info">
+                <Input
+                  disabled
+                  fluid
+                  value={this.state.dimensions.height} />
+                <Input
+                  disabled
+                  fluid
+                  value={this.state.dimensions.length} />
+                <Input
+                  disabled
+                  fluid
+                  value={this.state.dimensions.width} />
+                <Input
+                  disabled
+                  fluid
+                  value={this.state.dimensions.weight} />
+              </span>
+            </div>
+          </div>
+
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={this.props.toggleModal} negative content="Cancel" />
