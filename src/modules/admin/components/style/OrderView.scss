@@ -1,0 +1,31 @@
+.ov-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.ov-container {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ov-group-info {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.4);
+  margin-bottom: 15px;
+  span.ov-label {
+    flex-basis: 25%;
+    font-size: 14px;
+  }
+  span.ov-info {
+    flex-basis: 70%;
+    font-size: 14px;
+  }
+}
+
+.ov-group-item-column {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,117 +1,135 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Modal, Button } from 'semantic-ui-react'
+import moment from 'moment'
 
-import './style/UserView.css'
+import './style/OrderView.css'
 
-const checkPropItem = (item) => {
-  if (item && item.email) {
-    return item
+class OrderView extends Component {
+  state = {
+    item: {
+      user: [{}],
+      shippingAddress: {},
+      items: []
+    },
+    books: []
   }
-  return {
-    address: {},
-    wallet: {}
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.item && nextProps.item.orderType) {
+      this.setState({ item: nextProps.item })
+      this.getBooksRelatedToOrder(nextProps.item.items)
+    }
+  }
+
+  getBooksRelatedToOrder = async (BooksIds) => {
+    const books = await this.props.getBooksInOrder(BooksIds)
+    this.setState({ books })
+  }
+
+  render () {
+    const { item } = this.state
+    return (
+      <Modal
+        size='large'
+        open={this.props.openModal}
+        onClose={this.props.toggleModal}
+        style={{marginTop: '5%', margin: '5% auto'}}
+      >
+        <Modal.Header>
+          Edit Order
+        </Modal.Header>
+        <Modal.Content>
+          <div className="ov-body">
+
+            <div className="ov-container">
+
+              <div className="ov-group-info">
+                <span className="ov-label">Date Created</span>
+                <span className="ov-info">{moment(item.createdAt).format('MMMM Do YYYY')}</span>
+              </div>
+
+              <div className="ov-group-info">
+                <span className="ov-label">Order Type</span>
+                <span className="ov-info">{item.orderType}</span>
+              </div>
+
+              <div className="ov-group-info">
+                <span className="ov-label">Shipping Method</span>
+                <span className="ov-info">{item.shippingMethod}</span>
+              </div>
+
+              <div className="ov-group-info" style={{ paddingBottom: 40 }}>
+                <span className="ov-label">Customer's Information</span>
+                <div className="ov-group-item-column">
+                  <span className="ov-info">Name: {item.user[0].name}</span>
+                  <span className="ov-info">Email: {item.user[0].email}</span>
+                  <span className="ov-info">Telephone: {item.user[0].telephone}</span>
+                </div>
+              </div>
+
+              <div className="ov-group-info">
+                <span className="ov-label">Order Status</span>
+                <span className="ov-info">{item.status}</span>
+              </div>
+
+              <div className="ov-group-info">
+                <span className="ov-label">Transaction Id</span>
+                <span className="ov-info">{item.transactionId || 'Payment In Person'}</span>
+              </div>
+
+              <div className="ov-group-info" style={{ paddingBottom: 70 }}>
+                <span className="ov-label">Shipping Address</span>
+                <div className="ov-group-item-column">
+                  <span className="ov-info">{item.shippingAddress.street}</span>
+                  <span className="ov-info">{item.shippingAddress.city}</span>
+                  <span className="ov-info">{item.shippingAddress.state}</span>
+                  <span className="ov-info">{item.shippingAddress.zipCode}</span>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="ov-container">
+              <span className="ov-label">Items</span>
+              <div className="ov-group-info">
+                <div className="ov-group-item-column">
+                  {this.state.books.length > 0 && this.state.books.map(item => {
+                    return <div key={item.id} className="ov-group-item-column">
+                      <span className="ov-info">{item.title}</span>
+                      <span className="ov-info">ISBN: {item.isbn}</span>
+                      <span className="ov-info">Condition: {item.condition}</span>
+                      <span className="ov-info">Sell: $ {item.prices.sell}</span>
+                      <span className="ov-info">Buy: $ {item.prices.buy || '-'}</span>
+                      <span className="ov-info">Rent: $ {item.prices.rent || '-'}</span>
+                    </div>
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button
+            positive
+            icon='checkmark'
+            labelPosition='right'
+            content='Ok'
+            onClick={this.props.toggleModal}/>
+        </Modal.Actions>
+      </Modal>
+    )
   }
 }
-const clubName = (club) => {
-  return club === 'TWENTY' ? 'ELITE CLUB' : 'NONE'
-}
-const UserView = props => {
-  const item = checkPropItem(props.item)
-  return (
-    <Modal
-      size='tiny'
-      open={props.openModal}
-      onClose={props.toggleModal}
-      style={{marginTop: '5%', margin: '5% auto'}}
-    >
-      <Modal.Header>
-        Fulano's profile
-      </Modal.Header>
-      <Modal.Content>
-        <div className="uv-body">
-          <div className="uv-group-info">
-            <span className="uv-label">User Level</span>
-            <span className="uv-info">{item.role}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Name</span>
-            <span className="uv-info">{item.name}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Email</span>
-            <span className="uv-info">{item.email}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">School</span>
-            <span className="uv-info">{item.school}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Telephone</span>
-            <span className="uv-info">{item.telephone}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Birthdate</span>
-            <span className="uv-info">{item.birthDate}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Cub</span>
-            <span className="uv-info">{clubName(item.club)}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">City</span>
-            <span className="uv-info">{item.address.city}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">State</span>
-            <span className="uv-info">{item.address.state}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Street</span>
-            <span className="uv-info">{item.address.street}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Zipcode</span>
-            <span className="uv-info">{item.address.zipCode}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Paypal account</span>
-            <span className="uv-info">{item.wallet.paypalAccount}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Ballance</span>
-            <span className="uv-info">{item.wallet.ballance}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Request Withdraw</span>
-            <span className="uv-info">{item.wallet.status}</span>
-          </div>
-          <div className="uv-group-info">
-            <span className="uv-label">Rep's email</span>
-            <span className="uv-info">{item.referredBy}</span>
-          </div>
-        </div>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button
-          positive
-          icon='checkmark'
-          labelPosition='right'
-          content='Ok'
-          onClick={props.toggleModal}/>
-      </Modal.Actions>
-    </Modal>
-  )
-}
 
-UserView.propTypes = {
+OrderView.propTypes = {
   toggleModal: PropTypes.func.isRequired,
   openModal: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired
 }
 
-UserView.defaultProps = {
+OrderView.defaultProps = {
   item: {}
 }
 
-export default UserView
+export default OrderView

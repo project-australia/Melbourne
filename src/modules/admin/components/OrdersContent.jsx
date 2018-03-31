@@ -49,6 +49,7 @@ class OrdersContent extends Component {
           openModal={orderViewModal}
           toggleModal={this.toggleOrderViewModal}
           item={this.state.order}
+          getBooksInOrder={this.props.getBooksInOrder}
         />
         <OrderEdit
           openModal={orderEditModal}

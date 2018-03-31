@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { getAllOrders, updateOrder, findOrderById, searchOrders } from './../../../services/backend/orderService'
+import { findBooksById } from './../../../services/backend/bookService'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
 import CommonHeader from './../components/CommonHeader'
@@ -48,6 +49,7 @@ class Orders extends Component {
           listItems={itemList}
           updateItem={this.updateItem}
           viewItem={findOrderById}
+          getBooksInOrder={findBooksById}
         />
       </SectionCentered>
     )

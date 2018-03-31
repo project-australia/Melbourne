@@ -18,6 +18,15 @@ export const findBookById = async () => {
   }
 }
 
+export const findBooksById = async (BooksId) => {
+  try {
+    const books = await axios.post('/books/searchbyids', BooksId)
+    return books.data
+  } catch (err) {
+    console.log('err user', err.message)
+  }
+}
+
 export const updateBook = async (book) => {
   const { id, priceBuy, priceSell, priceRent, status, about, condition, featured } = book
   const body = {
