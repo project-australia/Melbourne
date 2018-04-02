@@ -56,6 +56,7 @@ class OrdersContent extends Component {
           toggleModal={this.toggleOrderEditModal}
           updateFunction={this.props.updateItem}
           item={this.state.order}
+          getBooksInOrder={this.props.getBooksInOrder}
         />
         <div className="uc-table">
           <Table striped>

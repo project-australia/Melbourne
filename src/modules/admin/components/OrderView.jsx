@@ -29,6 +29,7 @@ class OrderView extends Component {
 
   render () {
     const { item } = this.state
+    console.log('ORDER', item)
     return (
       <Modal
         size='large'

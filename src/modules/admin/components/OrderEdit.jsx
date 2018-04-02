@@ -1,51 +1,46 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Modal, Button, Input, Dropdown } from 'semantic-ui-react'
+import moment from 'moment'
 
-import './style/UserEdit.css'
+import './style/OrderEdit.css'
 
 class OrderEdit extends Component {
   state = {
-    id: '',
-    role: '',
-    name: '',
-    email: '',
-    birthDate: '',
-    telephone: '',
-    school: '',
-    ballance: '',
-    paypalAccount: '',
-    requestStatus: '',
-    state: '',
-    city: '',
-    zipCode: '',
-    street: '',
-    referredBy: ''
+    _id: '',
+    createdAt: '',
+    orderType: '',
+    user: [{}],
+    items: [],
+    status: '',
+    shippingAddress: {},
+    shippingMethod: '',
+    books: []
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.item && nextProps.item.email) {
+    if (nextProps.item && nextProps.item.orderType) {
       this.fillInputs(nextProps.item)
+      this.getBooks(nextProps.item.items)
     }
   }
-  fillInputs = (user) => {
+
+  getBooks = async (BooksIds) => {
+    const books = await this.props.getBooksInOrder(BooksIds)
+    console.log('books', books)
+    this.setState({ books })
+  }
+
+  fillInputs = (item) => {
     this.setState({
-      id: user.id,
-      role: user.role,
-      name: user.name,
-      email: user.email,
-      birthDate: user.birthDate || '',
-      telephone: user.telephone || '',
-      school: user.school || '',
-      ballance: user.wallet.ballance || '',
-      paypalAccount: user.wallet.paypalAccount || '',
-      requestStatus: user.wallet.status,
-      state: user.address.state || '',
-      city: user.address.city || '',
-      zipCode: user.address.zipCode || '',
-      street: user.address.street || '',
-      referredBy: user.referredBy || '',
-      club: user.club || ''
+      _id: item._id,
+      createdAt: item.createdAt,
+      orderType: item.orderType,
+      shippingMethod: item.shippingMethod,
+      user: item.user,
+      shippingAddress: item.shippingAddress,
+      transactionId: item.transactionId || ' - ',
+      status: item.status
     })
   }
 
@@ -53,258 +48,235 @@ class OrderEdit extends Component {
     this.props.updateFunction(this.state)
     this.props.toggleModal()
   }
-  handleRoleChange = (e, { value }) => this.setState({ role: value })
-  handleClubChange = (e, { value }) => this.setState({ club: value })
-  handleRequestStatusChange = (e, { value }) => this.setState({ requestStatus: value })
+
+  handleStatusChange = (e, { value }) => this.setState({ status: value })
+
+  handleBookInputChange = (e, index) => {
+    const {name, value} = e.target
+    const booksCopy = Object.assign({}, this.state.books)
+    booksCopy[index].prices[name] = value
+    this.setState({ booksCopy })
+  }
+
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value })
-  walletStatusOptions = () => [
-    { key: 'NONE', value: 'NONE', text: 'NONE' },
-    { key: 'PENDING', value: 'PENDING', text: 'PENDING' }
+
+  orderStatusOptions = () => [
+    { key: 'WAITING_PAYMENT', value: 'WAITING_PAYMENT', text: 'WAITING_PAYMENT' },
+    { key: 'PAYMENT_CONFIRMED', value: 'PAYMENT_CONFIRMED', text: 'PAYMENT_CONFIRMED' },
+    { key: 'CANCELLED', value: 'CANCELLED', text: 'CANCELLED' },
+    { key: 'RECEIVED', value: 'RECEIVED', text: 'RECEIVED' },
+    { key: 'SHIPPED', value: 'SHIPPED', text: 'SHIPPED' }
   ]
-  clubOptions = () => [
-    { key: 'NONE', value: 'NONE', text: 'NONE' },
-    { key: 'TWENTY', value: 'TWENTY', text: 'ELITE CLUB' }
+
+  conditionOptions = () => [
+    { key: 'Used – Acceptable', value: 'Used – Acceptable', text: 'Used – Acceptable' },
+    { key: 'Used – Good', value: 'Used – Good', text: 'Used – Good' },
+    { key: 'Used – Very Good', value: 'Used – Very Good', text: 'Used – Very Good' },
+    { key: 'Used – Like New', value: 'Used – Like New', text: 'Used – Like New' },
+    { key: 'New', value: 'New', text: 'New' }
   ]
-  roleOptions = () => [
-    { key: 'ADMIN', value: 'ADMIN', text: 'ADMIN' },
-    { key: 'REP', value: 'REP', text: 'REP' },
-    { key: 'USER', value: 'USER', text: 'USER' }
-  ]
+
   render () {
+    const { _id, createdAt, orderType, shippingMethod, user, transactionId, shippingAddress } = this.state
     return (
       <Modal
-        size='tiny'
+        size='large'
         open={this.props.openModal}
         onClose={this.props.toggleModal}
         style={{marginTop: '5%', margin: '5% auto'}}
       >
         <Modal.Header>
-          Edit Profile
+          Edit Order - Nº {_id}
         </Modal.Header>
         <Modal.Content>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Name
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='name'
-                  value={this.state.name}
-                  disabled
-                  fluid
-                  placeholder='Name' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Email
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='email'
-                  value={this.state.email}
-                  disabled
-                  fluid
-                  placeholder='Email' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Birthdate
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='birthDate'
-                  disabled
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.birthDate}
-                  placeholder='Birthdate' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Telephone
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='telephone'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.telephone}
-                  placeholder='Telephone' />
-              </span>
-            </div>
-          </div>
+          <div className="oe-body">
 
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Club
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Club"
-                  onChange={this.handleClubChange}
-                  selection
-                  value={this.state.club}
-                  options={this.clubOptions()} />
-              </span>
-            </div>
-          </div>
+            <div className="ov-container">
 
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                 Wallet Ballance
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='ballance'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.ballance}
-                  placeholder='Wallet Ballance' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Paypal Account
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='paypalAccount'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.paypalAccount}
-                  placeholder='Paypal Account' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Request Status
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Request Status"
-                  onChange={this.handleRequestStatusChange}
-                  selection
-                  value={this.state.requestStatus}
-                  options={this.walletStatusOptions()} />
-              </span>
-            </div>
-          </div>
+              <div className="oe-item">
+                <span className="oe-label">
+                  Date Created
+                </span>
+                <span className="oe-info">
+                  <Input
+                    name='createdAt'
+                    value={moment(createdAt).format('MMMM Do YYYY')}
+                    disabled
+                    fluid />
+                </span>
+              </div>
 
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Street
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='street'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.street}
-                  placeholder='Street' />
-              </span>
+              <div className="oe-item">
+                <span className="oe-label">
+                  Order Type
+                </span>
+                <span className="oe-info">
+                  <Input
+                    name='orderType'
+                    value={orderType}
+                    disabled
+                    fluid />
+                </span>
+              </div>
+
+              <div className="oe-item">
+                <span className="oe-label">
+                  Order Status
+                </span>
+                <span className="oe-info">
+                  <Dropdown
+                    placeholder="Select Order Status"
+                    onChange={this.handleStatusChange}
+                    selection
+                    value={this.state.status}
+                    options={this.orderStatusOptions()} />
+                </span>
+              </div>
+
+              <div className="oe-item">
+                <span className="oe-label">
+                Shipping Method
+                </span>
+                <span className="oe-info">
+                  <Input
+                    name='shippingMethod'
+                    value={shippingMethod}
+                    disabled
+                    fluid />
+                </span>
+              </div>
+
+              <div className="oe-item">
+                <span className="oe-label">
+                Transaction Id
+                </span>
+                <span className="oe-info">
+                  <Input
+                    name='transactionId'
+                    value={transactionId}
+                    disabled
+                    fluid />
+                </span>
+              </div>
+
+              <div className="oe-group-info" style={{ paddingBottom: 40 }}>
+                <span className="ov-label">Customer's Information</span>
+                <div className="ov-group-item-column">
+                  <span className="ov-info">Name: {user[0].name}</span>
+                  <span className="ov-info">Email: {user[0].email}</span>
+                  <span className="ov-info">Telephone: {user[0].telephone}</span>
+                </div>
+              </div>
+
+              <div className="oe-group-info" style={{ paddingBottom: 70 }}>
+                <span className="ov-label">Shipping Address</span>
+                <div className="ov-group-item-column">
+                  <span className="ov-info">{shippingAddress.street}</span>
+                  <span className="ov-info">{shippingAddress.city}</span>
+                  <span className="ov-info">{shippingAddress.state}</span>
+                  <span className="ov-info">{shippingAddress.zipCode}</span>
+                </div>
+              </div>
+
             </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                City
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='city'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.city}
-                  placeholder='City' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                State
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='state'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.state}
-                  placeholder='State' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Zipcode
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='zipCode'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.zipCode}
-                  placeholder='ZipCode' />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Rep's email
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='referredBy'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.referredBy}
-                  placeholder="Rep's email" />
-              </span>
-            </div>
-          </div>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Role
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Role"
-                  onChange={this.handleRoleChange}
-                  selection
-                  value={this.state.role}
-                  options={this.roleOptions()} />
-              </span>
+
+            <div className="ov-container">
+
+              <div className="oe-books">
+                <h3>
+                  Books
+                </h3>
+                {(this.state.books.length > 0 && this.state.orderType === 'SELL') && this.state.books.map((book, index) => {
+                  return (
+                    <div key={book.id} className="oe-book-container">
+                      <span className="ov-info">id: {book.id}</span>
+                      <span className="ov-info">Title: {book.title}</span>
+                      <span className="ov-info">ISBN: {book.isbn}</span>
+                      <div style={{ marginBottom: 10 }}>
+                        <span style={{ marginRight: 10 }}>Condition</span>
+                        <Dropdown
+                          placeholder="Select Order Status"
+                          onChange={this.handleStatusChange}
+                          selection
+                          value={book.condition}
+                          options={this.conditionOptions()} />
+                      </div>
+                      <div className="oe-prices">
+                        <div className="oe-price-item">
+                          <span className="oe-label">Sell</span>
+                          <span className="oe-info">
+                            <Input
+                              name='sell'
+                              type='number'
+                              required
+                              onChange={(event) => this.handleBookInputChange(event, index)}
+                              value={book.prices.sell}
+                              fluid />
+                          </span>
+                        </div>
+                        <div className="oe-price-item">
+                          <span className="oe-label">Buy</span>
+                          <span className="oe-info">
+                            <Input
+                              name='buy'
+                              type='number'
+                              onChange={(event) => this.handleBookInputChange(event, index)}
+                              value={book.prices.buy}
+                              fluid
+                              required
+                            />
+                          </span>
+                        </div>
+                        <div className="oe-price-item">
+                          <span className="oe-label">Rent</span>
+                          <span className="oe-info">
+                            <Input
+                              required
+                              name='rent'
+                              type='number'
+                              onChange={(event) => this.handleBookInputChange(event, index)}
+                              value={book.prices.rent}
+                              fluid />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+                {(this.state.books.length > 0 && this.state.orderType !== 'SELL') && this.state.books.map(book => {
+                  return <div className="oe-group-info" style={{ paddingBottom: 15 }}>
+                    <div className="ov-group-item-column">
+                      <span className="ov-info">Title: {book.title}</span>
+                      <span className="ov-info">ISBN: {book.isbn}</span>
+                      <span className="ov-info">Condition: {book.condition}</span>
+                      <span className="ov-info">Sell $: {book.prices.sell}</span>
+                      <span className="ov-info">Buy $: {book.prices.buy}</span>
+                      <span className="ov-info">Rent $: {book.prices.rent}</span>
+                    </div>
+                  </div>
+                })}
+              </div>
+
             </div>
           </div>
         </Modal.Content>
         <Modal.Actions>
+          {this.state.orderType === 'SELL' && <Button
+            positive
+            icon='checkmark'
+            labelPosition='right'
+            content='Confirm Sell Order'
+            onClick={() => this.updateItem()}/>}
+
           <Button onClick={this.props.toggleModal} negative content="Cancel" />
+
           <Button
             positive
             icon='checkmark'
             labelPosition='right'
             content='Save'
             onClick={() => this.updateItem()}/>
+
         </Modal.Actions>
       </Modal>
     )
