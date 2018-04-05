@@ -14,7 +14,6 @@ class Home extends Component {
   render () {
     return (
       <SectionCentered>
-        <h1>Home Page</h1>
       </SectionCentered>
     )
   }

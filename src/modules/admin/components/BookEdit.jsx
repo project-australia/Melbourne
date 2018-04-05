@@ -55,6 +55,10 @@ class BookEdit extends Component {
   handleStatusChange = (e, { value }) => this.setState({ status: value })
   handleConditionChange = (e, { value }) => this.setState({ condition: value })
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value })
+  handleInputPricesChange = (e) => {
+    const value = e.target.value.replace(',', '.')
+    this.setState({ [e.target.name]: value })
+  }
 
   featuredOptions = () => [
     { key: 'false', value: 'false', text: 'NO' },
@@ -103,6 +107,7 @@ class BookEdit extends Component {
               </span>
             </div>
           </div>
+
           <div className="ue-body">
             <div className="ue-item">
               <span className="ue-label">
@@ -127,7 +132,7 @@ class BookEdit extends Component {
               <span className="ue-info">
                 <Input
                   name='priceBuy'
-                  onChange={this.handleInputChange}
+                  onChange={this.handleInputPricesChange}
                   fluid
                   value={this.state.priceBuy}
                   placeholder='Buy Pricing' />
@@ -143,7 +148,7 @@ class BookEdit extends Component {
               <span className="ue-info">
                 <Input
                   name='priceSell'
-                  onChange={this.handleInputChange}
+                  onChange={this.handleInputPricesChange}
                   fluid
                   value={this.state.priceSell}
                   placeholder='Sell Pricing' />
@@ -159,7 +164,7 @@ class BookEdit extends Component {
               <span className="ue-info">
                 <Input
                   name='priceRent'
-                  onChange={this.handleInputChange}
+                  onChange={this.handleInputPricesChange}
                   fluid
                   value={this.state.priceRent}
                   placeholder='Rent Pricing' />

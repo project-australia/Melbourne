@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { getAllOrders, updateOrder, findOrderById, searchOrders } from './../../../services/backend/orderService'
+import { getAllOrders, updateOrder, findOrderById, searchOrders, confirmSellOrder } from './../../../services/backend/orderService'
 import { findBooksById } from './../../../services/backend/bookService'
 
 import SectionCentered from './../../shared/components/grid/SectionCentered'
@@ -34,6 +34,11 @@ class Orders extends Component {
     this.getAllItems()
   }
 
+  confirmOrder = (id, books) => {
+    confirmSellOrder(id, books)
+    this.getAllItems()
+  }
+
   render () {
     const { itemList } = this.state
     return (
@@ -50,6 +55,7 @@ class Orders extends Component {
           updateItem={this.updateItem}
           viewItem={findOrderById}
           getBooksInOrder={findBooksById}
+          confirmSellOrder={this.confirmOrder}
         />
       </SectionCentered>
     )

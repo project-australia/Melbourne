@@ -27,6 +27,22 @@ export const updateOrder = async () => {
   }
 }
 
+export const confirmSellOrder = async (id, books) => {
+  const parsedBooks = books.map(book => {
+    return { id: book.id, prices: book.prices }
+  })
+  const body = {
+    books: parsedBooks
+  }
+  try {
+    const orders = await axios.post(`/orders/${id}/confirmation`, body)
+    console.log('confirmation order', orders.data)
+    return orders.data
+  } catch (err) {
+    console.log('err user', err.message)
+  }
+}
+
 export const searchOrders = async (searchParam) => {
   try {
     const users = await axios.get(`/users/search?searchParam=${searchParam}`)

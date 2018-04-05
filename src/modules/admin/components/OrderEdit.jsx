@@ -27,7 +27,6 @@ class OrderEdit extends Component {
 
   getBooks = async (BooksIds) => {
     const books = await this.props.getBooksInOrder(BooksIds)
-    console.log('books', books)
     this.setState({ books })
   }
 
@@ -49,12 +48,18 @@ class OrderEdit extends Component {
     this.props.toggleModal()
   }
 
+  confirmOrderSell = () => {
+    const { _id, books } = this.state
+    this.props.confirmSellOrder(_id, books)
+    this.props.toggleModal()
+  }
+
   handleStatusChange = (e, { value }) => this.setState({ status: value })
 
   handleBookInputChange = (e, index) => {
     const {name, value} = e.target
     const booksCopy = Object.assign({}, this.state.books)
-    booksCopy[index].prices[name] = value
+    booksCopy[index].prices[name] = value.replace(',', '.')
     this.setState({ booksCopy })
   }
 
@@ -207,7 +212,6 @@ class OrderEdit extends Component {
                           <span className="oe-info">
                             <Input
                               name='sell'
-                              type='number'
                               required
                               onChange={(event) => this.handleBookInputChange(event, index)}
                               value={book.prices.sell}
@@ -219,7 +223,6 @@ class OrderEdit extends Component {
                           <span className="oe-info">
                             <Input
                               name='buy'
-                              type='number'
                               onChange={(event) => this.handleBookInputChange(event, index)}
                               value={book.prices.buy}
                               fluid
@@ -233,7 +236,6 @@ class OrderEdit extends Component {
                             <Input
                               required
                               name='rent'
-                              type='number'
                               onChange={(event) => this.handleBookInputChange(event, index)}
                               value={book.prices.rent}
                               fluid />
@@ -266,7 +268,7 @@ class OrderEdit extends Component {
             icon='checkmark'
             labelPosition='right'
             content='Confirm Sell Order'
-            onClick={() => this.updateItem()}/>}
+            onClick={() => this.confirmOrderSell()}/>}
 
           <Button onClick={this.props.toggleModal} negative content="Cancel" />
 

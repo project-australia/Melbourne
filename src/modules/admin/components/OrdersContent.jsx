@@ -57,6 +57,7 @@ class OrdersContent extends Component {
           updateFunction={this.props.updateItem}
           item={this.state.order}
           getBooksInOrder={this.props.getBooksInOrder}
+          confirmSellOrder={this.props.confirmSellOrder}
         />
         <div className="uc-table">
           <Table striped>
