@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Input, Button, Icon, Label } from 'semantic-ui-react'
-import DatePicker from 'react-datepicker'
+import { Input, Button } from 'semantic-ui-react'
+// import DatePicker from 'react-datepicker'
 import moment from 'moment'
 
 import './style/UsersFilter.css'

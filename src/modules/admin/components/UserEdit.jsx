@@ -13,7 +13,7 @@ class UserEdit extends Component {
     birthDate: '',
     telephone: '',
     school: '',
-    ballance: '',
+    balance: '',
     paypalAccount: '',
     requestStatus: '',
     state: '',
@@ -37,7 +37,7 @@ class UserEdit extends Component {
       birthDate: user.birthDate || '',
       telephone: user.telephone || '',
       school: user.school || '',
-      ballance: user.wallet.ballance || '',
+      balance: user.wallet.balance || '',
       paypalAccount: user.wallet.paypalAccount || '',
       requestStatus: user.wallet.status,
       state: user.address.state || '',
@@ -53,6 +53,7 @@ class UserEdit extends Component {
     this.props.updateFunction(this.state)
     this.props.toggleModal()
   }
+
   handleRoleChange = (e, { value }) => this.setState({ role: value })
   handleClubChange = (e, { value }) => this.setState({ club: value })
   handleRequestStatusChange = (e, { value }) => this.setState({ requestStatus: value })
@@ -167,10 +168,10 @@ class UserEdit extends Component {
               </span>
               <span className="ue-info">
                 <Input
-                  name='ballance'
+                  name='balance'
                   onChange={this.handleInputChange}
                   fluid
-                  value={this.state.ballance}
+                  value={this.state.balance}
                   placeholder='Wallet Ballance' />
               </span>
             </div>

@@ -27,16 +27,15 @@ export const updateOrder = async () => {
   }
 }
 
-export const confirmSellOrder = async (id, books) => {
+export const confirmSellOrder = async (idUser, idOrder, books) => {
   const parsedBooks = books.map(book => {
-    return { id: book.id, prices: book.prices }
+    return { id: book.id, condition: book.condition, prices: book.prices }
   })
   const body = {
     books: parsedBooks
   }
   try {
-    const orders = await axios.post(`/orders/${id}/confirmation`, body)
-    console.log('confirmation order', orders.data)
+    const orders = await axios.post(`/users/${idUser}/orders/${idOrder}/confirmation`, body)
     return orders.data
   } catch (err) {
     console.log('err user', err.message)

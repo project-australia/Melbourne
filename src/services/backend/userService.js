@@ -10,7 +10,7 @@ export const getAllUsers = async () => {
 }
 
 export const updateUser = async (userToUpdate) => {
-  const { id, city, state, role, telephone, street, zipCode, club, requestStatus, ballance, referredBy, paypalAccount } = userToUpdate
+  const { id, city, state, role, telephone, street, zipCode, club, requestStatus, balance, referredBy, paypalAccount } = userToUpdate
   const body = {
     club,
     role,
@@ -24,7 +24,7 @@ export const updateUser = async (userToUpdate) => {
     },
     wallet: {
       status: requestStatus,
-      ballance,
+      balance,
       paypalAccount
     }
   }

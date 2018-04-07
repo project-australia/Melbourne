@@ -26,7 +26,7 @@ const UserView = props => {
       style={{marginTop: '5%', margin: '5% auto'}}
     >
       <Modal.Header>
-        Fulano's profile
+        View User Profile
       </Modal.Header>
       <Modal.Content>
         <div className="uv-body">
@@ -79,8 +79,8 @@ const UserView = props => {
             <span className="uv-info">{item.wallet.paypalAccount}</span>
           </div>
           <div className="uv-group-info">
-            <span className="uv-label">Ballance</span>
-            <span className="uv-info">{item.wallet.ballance}</span>
+            <span className="uv-label">Balance</span>
+            <span className="uv-info">{item.wallet.balance}</span>
           </div>
           <div className="uv-group-info">
             <span className="uv-label">Request Withdraw</span>

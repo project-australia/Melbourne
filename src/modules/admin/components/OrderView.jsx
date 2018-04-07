@@ -62,9 +62,9 @@ class OrderView extends Component {
               <div className="ov-group-info" style={{ paddingBottom: 40 }}>
                 <span className="ov-label">Customer's Information</span>
                 <div className="ov-group-item-column">
-                  <span className="ov-info">Name: {item.user[0].name}</span>
-                  <span className="ov-info">Email: {item.user[0].email}</span>
-                  <span className="ov-info">Telephone: {item.user[0].telephone}</span>
+                  <span className="ov-info">Name: {item.user.name}</span>
+                  <span className="ov-info">Email: {item.user.email}</span>
+                  <span className="ov-info">Telephone: {item.user.telephone}</span>
                 </div>
               </div>
 

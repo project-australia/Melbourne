@@ -34,8 +34,8 @@ class Orders extends Component {
     this.getAllItems()
   }
 
-  confirmOrder = (id, books) => {
-    confirmSellOrder(id, books)
+  confirmOrder = (idUser, idOrder, books) => {
+    confirmSellOrder(idUser, idOrder, books)
     this.getAllItems()
   }
 

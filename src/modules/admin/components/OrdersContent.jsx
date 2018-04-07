@@ -77,14 +77,14 @@ class OrdersContent extends Component {
             <Table.Body>
               {listItems.map(order => {
                 return (
-                  <Table.Row key={order._id}>
-                    <Table.Cell>{order._id}</Table.Cell>
-                    <Table.Cell>{moment(order.createdAt).format('MMM Do YY')}</Table.Cell>
+                  <Table.Row key={order.id}>
+                    <Table.Cell>{order.id}</Table.Cell>
+                    <Table.Cell>{moment(order.createdAt).format('MMM Do YY, h:mm:ss a')}</Table.Cell>
                     <Table.Cell>{order.orderType}</Table.Cell>
                     <Table.Cell>{order.transactionId}</Table.Cell>
                     <Table.Cell>{order.status}</Table.Cell>
                     <Table.Cell> - </Table.Cell>
-                    <Table.Cell>{order.user[0].email}</Table.Cell>
+                    <Table.Cell>{order.user.email}</Table.Cell>
                     <Table.Cell>
                       <div className="uc-actions">
                         <Button onClick={() => this.toggleOrderEditModal(order)} icon>

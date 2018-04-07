@@ -7,14 +7,15 @@ import './style/OrderEdit.css'
 
 class OrderEdit extends Component {
   state = {
-    _id: '',
+    id: '',
     createdAt: '',
     orderType: '',
-    user: [{}],
+    user: {},
     items: [],
     status: '',
     shippingAddress: {},
     shippingMethod: '',
+    customerId: '',
     books: []
   }
 
@@ -32,13 +33,14 @@ class OrderEdit extends Component {
 
   fillInputs = (item) => {
     this.setState({
-      _id: item._id,
+      id: item.id,
       createdAt: item.createdAt,
       orderType: item.orderType,
       shippingMethod: item.shippingMethod,
       user: item.user,
       shippingAddress: item.shippingAddress,
       transactionId: item.transactionId || ' - ',
+      customerId: item.customerId,
       status: item.status
     })
   }
@@ -49,8 +51,8 @@ class OrderEdit extends Component {
   }
 
   confirmOrderSell = () => {
-    const { _id, books } = this.state
-    this.props.confirmSellOrder(_id, books)
+    const { customerId, id, books } = this.state
+    this.props.confirmSellOrder(customerId, id, books)
     this.props.toggleModal()
   }
 
@@ -82,7 +84,7 @@ class OrderEdit extends Component {
   ]
 
   render () {
-    const { _id, createdAt, orderType, shippingMethod, user, transactionId, shippingAddress } = this.state
+    const { id, createdAt, orderType, shippingMethod, user, transactionId, shippingAddress } = this.state
     return (
       <Modal
         size='large'
@@ -91,7 +93,7 @@ class OrderEdit extends Component {
         style={{marginTop: '5%', margin: '5% auto'}}
       >
         <Modal.Header>
-          Edit Order - Nº {_id}
+          Edit Order - Nº {id}
         </Modal.Header>
         <Modal.Content>
           <div className="oe-body">
@@ -167,9 +169,9 @@ class OrderEdit extends Component {
               <div className="oe-group-info" style={{ paddingBottom: 40 }}>
                 <span className="ov-label">Customer's Information</span>
                 <div className="ov-group-item-column">
-                  <span className="ov-info">Name: {user[0].name}</span>
-                  <span className="ov-info">Email: {user[0].email}</span>
-                  <span className="ov-info">Telephone: {user[0].telephone}</span>
+                  <span className="ov-info">Name: {user.name}</span>
+                  <span className="ov-info">Email: {user.email}</span>
+                  <span className="ov-info">Telephone: {user.telephone}</span>
                 </div>
               </div>
 
@@ -194,6 +196,7 @@ class OrderEdit extends Component {
                 {(this.state.books.length > 0 && this.state.orderType === 'SELL') && this.state.books.map((book, index) => {
                   return (
                     <div key={book.id} className="oe-book-container">
+                      <span className="ov-info">STATUS {book.status}</span>
                       <span className="ov-info">id: {book.id}</span>
                       <span className="ov-info">Title: {book.title}</span>
                       <span className="ov-info">ISBN: {book.isbn}</span>
@@ -246,8 +249,9 @@ class OrderEdit extends Component {
                   )
                 })}
                 {(this.state.books.length > 0 && this.state.orderType !== 'SELL') && this.state.books.map(book => {
-                  return <div className="oe-group-info" style={{ paddingBottom: 15 }}>
+                  return <div key={book.id} className="oe-group-info" style={{ paddingBottom: 15 }}>
                     <div className="ov-group-item-column">
+                      <span className="ov-info">STATUS: {book.status}</span>
                       <span className="ov-info">Title: {book.title}</span>
                       <span className="ov-info">ISBN: {book.isbn}</span>
                       <span className="ov-info">Condition: {book.condition}</span>
@@ -267,7 +271,7 @@ class OrderEdit extends Component {
             positive
             icon='checkmark'
             labelPosition='right'
-            content='Confirm Sell Order'
+            content='Confirm Order and Pay To User and Reps'
             onClick={() => this.confirmOrderSell()}/>}
 
           <Button onClick={this.props.toggleModal} negative content="Cancel" />
