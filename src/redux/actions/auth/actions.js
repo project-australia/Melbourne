@@ -41,8 +41,7 @@ export function signinSignup (email, password) {
           const userProfile = await findUserById(user.uid)
           dispatch([
             createAction(USER_SET_PROFILE, userProfile),
-            createAction(AUTH_LOGGED_STATUS, true),
-            handleMessage('success', 'login', 'deu certo')
+            createAction(AUTH_LOGGED_STATUS, true)
           ])
         }
       })
