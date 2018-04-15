@@ -11,7 +11,11 @@ import BooksContent from '../components/BooksContent'
 
 class Books extends Component {
   state = {
-    itemList: []
+    itemList: {
+      books: [],
+      activePage: 0,
+      totalPages: 0
+    }
   }
 
   componentDidMount () {
@@ -19,12 +23,16 @@ class Books extends Component {
   }
 
   searchItems = async searchParam => {
-    const itemList = await searchBooks(searchParam)
-    this.setState({ itemList })
+    if (searchParam) {
+      const itemList = await searchBooks(searchParam)
+      this.setState({ itemList })
+    } else {
+      this.getAllItems()
+    }
   }
 
-  getAllItems = async () => {
-    const itemList = await getAllBooks()
+  getAllItems = async (activePage) => {
+    const itemList = await getAllBooks(activePage)
     this.setState({ itemList })
   }
 
@@ -48,6 +56,7 @@ class Books extends Component {
           listItems={itemList}
           updateItem={this.updateItem}
           viewItem={findBookById}
+          changePage={this.getAllItems}
         />
       </SectionCentered>
     )

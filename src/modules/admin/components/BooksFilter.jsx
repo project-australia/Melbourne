@@ -19,7 +19,7 @@ class BooksFilter extends Component {
             value={this.state.value}
             onChange={event => this.handleInputChange(event)}
             fluid
-            placeholder="Name, Email or School"
+            placeholder="ISBN, Title, Authors"
           />
         </div>
         <div className="uf-button-box">

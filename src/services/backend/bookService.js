@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const getAllBooks = async () => {
+export const getAllBooks = async (activePage = 1) => {
   try {
-    const books = await axios.get('/books')
+    const books = await axios.get(`/books?activePage=${activePage}`)
     return books.data
   } catch (err) {
     console.log('err user', err.message)
@@ -50,8 +50,8 @@ export const updateBook = async (book) => {
 
 export const searchBooks = async (searchParam) => {
   try {
-    const users = await axios.get(`/users/search?searchParam=${searchParam}`)
-    return users.data
+    const books = await axios.get(`/books/searchPaginated?search=${searchParam}`)
+    return books.data
   } catch (err) {
     console.log('err user', err.message)
   }

@@ -9,20 +9,21 @@ import './style/UsersContent.css'
 
 class UsersContent extends Component {
   state = {
-    activePage: 5,
-    boundaryRange: 1,
-    siblingRange: 1,
+    boundaryRange: 0,
+    siblingRange: 2,
     showEllipsis: true,
     showFirstAndLastNav: true,
-    showPreviousAndNextNav: true,
-    totalPages: 50,
+    showPreviousAndNextNav: false,
     openModal: false,
     bookViewModal: false,
     bookEditModal: false,
     book: {}
   }
 
-  handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
+  handlePaginationChange = (e, { activePage }) => {
+    console.log('pag books')
+    this.props.changePage(activePage)
+  }
 
   toggleModal = (book) => this.setState((state, props) => ({ openModal: !state.openModal, book }))
   toggleBookViewModal = (book) => this.setState((state, props) => ({ bookViewModal: !state.bookViewModal, book }))
@@ -30,17 +31,15 @@ class UsersContent extends Component {
 
   render () {
     const {
-      activePage,
       boundaryRange,
       siblingRange,
       showEllipsis,
       showFirstAndLastNav,
       showPreviousAndNextNav,
-      totalPages,
       bookViewModal,
       bookEditModal
     } = this.state
-    const { listItems } = this.props
+    const { books, activePage, totalPages } = this.props.listItems
     return (
       <div className="uc-wrapper">
 
@@ -70,7 +69,7 @@ class UsersContent extends Component {
             </Table.Header>
 
             <Table.Body>
-              {listItems.map(book => {
+              {books.map(book => {
                 return (
                   <Table.Row key={book.id}>
                     <Table.Cell>{book.id}</Table.Cell>
