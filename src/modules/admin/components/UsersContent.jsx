@@ -9,7 +9,7 @@ import './style/UsersContent.css'
 
 class UsersContent extends Component {
   state = {
-    activePage: 5,
+    activePage: 1,
     boundaryRange: 1,
     siblingRange: 1,
     showEllipsis: true,
@@ -96,7 +96,7 @@ class UsersContent extends Component {
               <Table.Row>
                 <Table.HeaderCell colSpan='5'>
                   <Menu floated='right' pagination>
-                    <Pagination
+                    {activePage > 1 && <Pagination
                       className="uc-pagination"
                       activePage={activePage}
                       boundaryRange={boundaryRange}
@@ -109,7 +109,7 @@ class UsersContent extends Component {
                       lastItem={showFirstAndLastNav ? undefined : null}
                       prevItem={showPreviousAndNextNav ? undefined : null}
                       nextItem={showPreviousAndNextNav ? undefined : null}
-                    />
+                    />}
                   </Menu>
                 </Table.HeaderCell>
               </Table.Row>

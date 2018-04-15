@@ -12,7 +12,8 @@ const middleware = [thunk, multi]
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  blacklist: ['user', 'auth']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -23,7 +23,6 @@ class BookEdit extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.item && nextProps.item.id) {
-      console.log('item', nextProps.item)
       this.fillInputs(nextProps.item)
     }
   }

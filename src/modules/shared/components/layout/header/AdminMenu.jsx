@@ -15,6 +15,11 @@ const navigate = (route) => { history.push(route) }
 
 const AdminMenu = props => (
   <Menu borderless={false} stackable size='large'>
+    <Menu.Menu position='left'>
+      <Menu.Item>
+        <h2>Menu for Admin users</h2>
+      </Menu.Item>
+    </Menu.Menu>
     <Menu.Menu position='right'>
       <Menu.Item name='Dashboard' onClick={() => navigate(ADM_DASHBOARD)} />
       <Menu.Item name='Orders' onClick={() => navigate(ADM_ORDERS)} />

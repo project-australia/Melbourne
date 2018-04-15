@@ -14,12 +14,12 @@ import './../../style/header.css'
 class Header extends Component {
   logOff = () => this.props.signOut()
   render () {
-    const { logged } = this.props
+    const { logged, role } = this.props
     return (
       <SectionCentered>
         {!logged && <DefaultMenu />}
         {logged && <LoggedMenu logoutFunc={this.logOff} />}
-        {logged && <AdminMenu />}
+        {(logged && role === 'ADMIN') && <AdminMenu />}
       </SectionCentered>
     )
   }
@@ -31,7 +31,8 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    logged: state.auth.logged
+    logged: state.auth.logged,
+    role: state.user.profile.role
   }
 }
 
