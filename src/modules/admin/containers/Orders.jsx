@@ -12,7 +12,11 @@ import OrdersContent from '../components/OrdersContent'
 
 class Orders extends Component {
   state = {
-    itemList: []
+    itemList: {
+      orders: [],
+      totalPages: 0,
+      activePage: 0
+    }
   }
 
   componentDidMount () {
@@ -24,8 +28,8 @@ class Orders extends Component {
     this.setState({ itemList })
   }
 
-  getAllItems = async () => {
-    const Orders = await getAllOrders()
+  getAllItems = async (activePage) => {
+    const Orders = await getAllOrders(activePage)
     this.setState({ itemList: Orders })
   }
 
@@ -56,6 +60,7 @@ class Orders extends Component {
           viewItem={findOrderById}
           getBooksInOrder={findBooksById}
           confirmSellOrder={this.confirmOrder}
+          changePage={this.getAllItems}
         />
       </SectionCentered>
     )

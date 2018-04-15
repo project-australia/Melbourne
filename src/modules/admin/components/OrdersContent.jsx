@@ -10,20 +10,20 @@ import './style/UsersContent.css'
 
 class OrdersContent extends Component {
   state = {
-    activePage: 5,
-    boundaryRange: 1,
-    siblingRange: 1,
+    boundaryRange: 0,
+    siblingRange: 2,
     showEllipsis: true,
     showFirstAndLastNav: true,
-    showPreviousAndNextNav: true,
-    totalPages: 50,
+    showPreviousAndNextNav: false,
     openModal: false,
     orderViewModal: false,
     orderEditModal: false,
     order: {}
   }
 
-  handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
+  handlePaginationChange = (e, { activePage }) => {
+    this.props.changePage(activePage)
+  }
 
   toggleModal = (order) => this.setState((state, props) => ({ openModal: !state.openModal, order }))
   toggleOrderViewModal = (order) => this.setState((state, props) => ({ orderViewModal: !state.orderViewModal, order }))
@@ -31,17 +31,15 @@ class OrdersContent extends Component {
 
   render () {
     const {
-      activePage,
       boundaryRange,
       siblingRange,
       showEllipsis,
       showFirstAndLastNav,
       showPreviousAndNextNav,
-      totalPages,
       orderViewModal,
       orderEditModal
     } = this.state
-    const { listItems } = this.props
+    const { orders, activePage, totalPages } = this.props.listItems
     return (
       <div className="uc-wrapper">
 
@@ -75,7 +73,7 @@ class OrdersContent extends Component {
             </Table.Header>
 
             <Table.Body>
-              {listItems.map(order => {
+              {orders.map(order => {
                 return (
                   <Table.Row key={order.id}>
                     <Table.Cell>{order.id}</Table.Cell>
@@ -130,7 +128,7 @@ class OrdersContent extends Component {
 }
 
 OrdersContent.propTypess = {
-  listItems: PropTypes.array.isRequired,
+  listItems: PropTypes.object.isRequired,
   updateItem: PropTypes.func.isRequired,
   viewItem: PropTypes.func.isRequired
 }

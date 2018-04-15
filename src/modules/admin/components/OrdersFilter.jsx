@@ -11,9 +11,8 @@ class OrdersFilter extends Component {
     endDate: moment(),
     value: ''
   }
-
+  handleInput = evt => this.setState({ value: evt.target.value })
   handleStartDate = date => this.setState({startDate: date})
-
   handleEndDate = date => this.setState({endDate: date})
 
   render () {
@@ -40,10 +39,10 @@ class OrdersFilter extends Component {
           />
         </div> */}
         <div className="uf-input-box">
-          <Input fluid placeholder='Order Number, Users email' />
+          <Input fluid placeholder='Order Number' name='value' onChange={this.handleInput}/>
         </div>
         <div className="uf-button-box">
-          <Button content='SEARCH' onClick={() => console.log('clicked')} />
+          <Button content='SEARCH' onClick={() => this.props.searchFunction(this.state.value)} />
         </div>
       </div>
     )
