@@ -26,7 +26,6 @@ export const updateOrder = async (order) => {
   }
   try {
     const orders = await axios.put(`/orders/${id}`, body)
-    console.log('order updated', orders.data)
     return orders.data
   } catch (err) {
     console.log('err user', err.message)
