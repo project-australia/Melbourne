@@ -5,7 +5,11 @@ import {
 import * as user from './reducers'
 
 const INITIAL_STATE = {
-  profile: {}
+  profile: {
+    user: {
+      role: ''
+    }
+  }
 }
 
 export default (state = INITIAL_STATE, action = {}) => {

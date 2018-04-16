@@ -268,10 +268,10 @@ class OrderEdit extends Component {
         </Modal.Content>
         <Modal.Actions>
           {this.state.orderType === 'SELL' && <Button
-            positive
+            color='yellow'
             icon='checkmark'
             labelPosition='right'
-            content='Confirm Order and Pay To User and Reps'
+            content='Confirm Order, Update Books Prices, Give Credit to Seller and Reps'
             onClick={() => this.confirmOrderSell()}/>}
 
           <Button onClick={this.props.toggleModal} negative content="Cancel" />
@@ -280,7 +280,7 @@ class OrderEdit extends Component {
             positive
             icon='checkmark'
             labelPosition='right'
-            content='Save'
+            content={this.state.orderType === 'SELL' ? 'Update Order Status' : 'Save'}
             onClick={() => this.updateItem()}/>
 
         </Modal.Actions>

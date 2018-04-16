@@ -18,9 +18,16 @@ export const findOrderById = async () => {
   }
 }
 
-export const updateOrder = async () => {
+export const updateOrder = async (order) => {
+  const { id, transactionId, status } = order
+  const body = {
+    transactionId,
+    status
+  }
   try {
-    console.log('needs implemantation')
+    const orders = await axios.put(`/orders/${id}`, body)
+    console.log('order updated', orders.data)
+    return orders.data
   } catch (err) {
     console.log('err user', err.message)
   }
