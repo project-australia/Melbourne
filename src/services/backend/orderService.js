@@ -50,7 +50,6 @@ export const confirmSellOrder = async (idUser, idOrder, books) => {
 export const searchOrders = async (searchParam) => {
   try {
     const orders = await axios.get(`/orders/search?searchParam=${searchParam}`)
-    console.log('search result', orders.data)
     return orders.data
   } catch (err) {
     console.log('err user', err.message)

@@ -24,8 +24,12 @@ class Orders extends Component {
   }
 
   searchOrders = async searchParam => {
-    const itemList = await searchOrders(searchParam)
-    this.setState({ itemList })
+    if (searchParam) {
+      const itemList = await searchOrders(searchParam)
+      this.setState({ itemList })
+    } else {
+      this.getAllItems()
+    }
   }
 
   getAllItems = async (activePage) => {

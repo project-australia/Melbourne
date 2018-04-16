@@ -58,6 +58,9 @@ class UserEdit extends Component {
   handleClubChange = (e, { value }) => this.setState({ club: value })
   handleRequestStatusChange = (e, { value }) => this.setState({ requestStatus: value })
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value })
+  handleInputBallance = (e) => {
+    this.setState({ [e.target.name]: e.target.value.replace(',', '.') })
+  }
   walletStatusOptions = () => [
     { key: 'NONE', value: 'NONE', text: 'NONE' },
     { key: 'PENDING', value: 'PENDING', text: 'PENDING' }
@@ -169,7 +172,7 @@ class UserEdit extends Component {
               <span className="ue-info">
                 <Input
                   name='balance'
-                  onChange={this.handleInputChange}
+                  onChange={this.handleInputBallance}
                   fluid
                   value={this.state.balance}
                   placeholder='Wallet Ballance' />

@@ -20,7 +20,6 @@ class Users extends Component {
 
   searchUsers = async searchParam => {
     const usersList = await searchUsers(searchParam)
-    console.log('resultado do search', usersList)
     this.setState({ usersList })
   }
 
