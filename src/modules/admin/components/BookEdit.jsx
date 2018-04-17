@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Modal, Button, Input, Dropdown } from 'semantic-ui-react'
 
-import './style/UserEdit.css'
+import './style/BookEdit.css'
 
 class BookEdit extends Component {
   state = {
@@ -82,222 +82,226 @@ class BookEdit extends Component {
   render () {
     return (
       <Modal
-        size='tiny'
+        size='large'
         open={this.props.openModal}
         onClose={this.props.toggleModal}
-        style={{marginTop: '5%', margin: '5% auto'}}
+        style={{marginTop: '1%', margin: '1% auto'}}
       >
         <Modal.Header>
           Edit Book
         </Modal.Header>
         <Modal.Content>
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Status
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Status"
-                  onChange={this.handleStatusChange}
-                  value={this.state.status}
-                  selection
-                  options={this.statusOptions()} />
-              </span>
+          <div className='container-book-edit'>
+            <div>
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    Status
+                  </span>
+                  <span className="ue-info">
+                    <Dropdown
+                      placeholder="Select Status"
+                      onChange={this.handleStatusChange}
+                      value={this.state.status}
+                      selection
+                      options={this.statusOptions()} />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    Description
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      name='about'
+                      onChange={this.handleInputChange}
+                      value={this.state.about}
+                      fluid
+                      placeholder='Description' />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    Price: Buy
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      name='priceBuy'
+                      onChange={this.handleInputPricesChange}
+                      fluid
+                      value={this.state.priceBuy}
+                      placeholder='Buy Pricing' />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    Price: Sell
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      name='priceSell'
+                      onChange={this.handleInputPricesChange}
+                      fluid
+                      value={this.state.priceSell}
+                      placeholder='Sell Pricing' />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    Price: Rent
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      name='priceRent'
+                      onChange={this.handleInputPricesChange}
+                      fluid
+                      value={this.state.priceRent}
+                      placeholder='Rent Pricing' />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                  Title
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      name='title'
+                      onChange={this.handleInputChange}
+                      fluid
+                      value={this.state.title}
+                      disabled
+                      placeholder='title' />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                  Authors
+                  </span>
+                  <span className="ue-info">
+                    {this.state.authors.map(author => {
+                      return <Input
+                        key={author}
+                        fluid
+                        value={author
+                        }
+                        disabled />
+                    })}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                  Condition
+                  </span>
+                  <span className="ue-info">
+                    <Dropdown
+                      placeholder="Select Condition"
+                      onChange={this.handleConditionChange}
+                      selection
+                      value={this.state.condition}
+                      options={this.conditionOptions()} />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    Featured
+                  </span>
+                  <span className="ue-info">
+                    <Dropdown
+                      placeholder="Select Featured"
+                      onChange={this.handleFeaturedChange}
+                      selection
+                      value={this.state.featured}
+                      options={this.featuredOptions()} />
+                  </span>
+                </div>
+              </div>
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    ISBN
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      name='isbn'
+                      onChange={this.handleInputChange}
+                      fluid
+                      disabled
+                      value={this.state.isbn}
+                      placeholder='Isbn' />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                  Edition
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      name='edition'
+                      onChange={this.handleInputChange}
+                      fluid
+                      disabled
+                      value={this.state.edition}
+                      placeholder='Edition' />
+                  </span>
+                </div>
+              </div>
+
+              <div className="ue-body">
+                <div className="ue-item">
+                  <span className="ue-label">
+                    Dimensions
+                  </span>
+                  <span className="ue-info">
+                    <Input
+                      disabled
+                      fluid
+                      value={this.state.dimensions.height} />
+                    <Input
+                      disabled
+                      fluid
+                      value={this.state.dimensions.length} />
+                    <Input
+                      disabled
+                      fluid
+                      value={this.state.dimensions.width} />
+                    <Input
+                      disabled
+                      fluid
+                      value={this.state.dimensions.weight} />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Description
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='about'
-                  onChange={this.handleInputChange}
-                  value={this.state.about}
-                  fluid
-                  placeholder='Description' />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Price: Buy
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='priceBuy'
-                  onChange={this.handleInputPricesChange}
-                  fluid
-                  value={this.state.priceBuy}
-                  placeholder='Buy Pricing' />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Price: Sell
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='priceSell'
-                  onChange={this.handleInputPricesChange}
-                  fluid
-                  value={this.state.priceSell}
-                  placeholder='Sell Pricing' />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Price: Rent
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='priceRent'
-                  onChange={this.handleInputPricesChange}
-                  fluid
-                  value={this.state.priceRent}
-                  placeholder='Rent Pricing' />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-              Condition
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Condition"
-                  onChange={this.handleConditionChange}
-                  selection
-                  value={this.state.condition}
-                  options={this.conditionOptions()} />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Featured
-              </span>
-              <span className="ue-info">
-                <Dropdown
-                  placeholder="Select Featured"
-                  onChange={this.handleFeaturedChange}
-                  selection
-                  value={this.state.featured}
-                  options={this.featuredOptions()} />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-              Title
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='title'
-                  onChange={this.handleInputChange}
-                  fluid
-                  value={this.state.title}
-                  disabled
-                  placeholder='title' />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-              Authors
-              </span>
-              <span className="ue-info">
-                {this.state.authors.map(author => {
-                  return <Input
-                    key={author}
-                    fluid
-                    value={author
-                    }
-                    disabled />
-                })}
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                ISBN
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='isbn'
-                  onChange={this.handleInputChange}
-                  fluid
-                  disabled
-                  value={this.state.isbn}
-                  placeholder='Isbn' />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-               Edition
-              </span>
-              <span className="ue-info">
-                <Input
-                  name='edition'
-                  onChange={this.handleInputChange}
-                  fluid
-                  disabled
-                  value={this.state.edition}
-                  placeholder='Edition' />
-              </span>
-            </div>
-          </div>
-
-          <div className="ue-body">
-            <div className="ue-item">
-              <span className="ue-label">
-                Dimensions
-              </span>
-              <span className="ue-info">
-                <Input
-                  disabled
-                  fluid
-                  value={this.state.dimensions.height} />
-                <Input
-                  disabled
-                  fluid
-                  value={this.state.dimensions.length} />
-                <Input
-                  disabled
-                  fluid
-                  value={this.state.dimensions.width} />
-                <Input
-                  disabled
-                  fluid
-                  value={this.state.dimensions.weight} />
-              </span>
-            </div>
-          </div>
-
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={this.props.toggleModal} negative content="Cancel" />
