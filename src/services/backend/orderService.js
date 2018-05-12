@@ -3,6 +3,7 @@ import axios from 'axios'
 export const getAllOrders = async (activepage = 1) => {
   try {
     const orders = await axios.get(`/orders?activepage=${activepage}`)
+    console.log('orders', orders.data)
     return orders.data
   } catch (err) {
     console.log('err user', err.message)

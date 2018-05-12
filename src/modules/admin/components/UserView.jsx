@@ -23,7 +23,7 @@ const UserView = props => {
       size='tiny'
       open={props.openModal}
       onClose={props.toggleModal}
-      style={{marginTop: '5%', margin: '5% auto'}}
+      style={{marginTop: '1%', margin: '1% auto'}}
     >
       <Modal.Header>
         View User Profile
@@ -74,10 +74,17 @@ const UserView = props => {
             <span className="uv-label">Zipcode</span>
             <span className="uv-info">{item.address.zipCode}</span>
           </div>
+
           <div className="uv-group-info">
             <span className="uv-label">Paypal account</span>
             <span className="uv-info">{item.wallet.paypalAccount}</span>
           </div>
+
+          <div className="uv-group-info">
+            <span className="uv-label">Venmo account</span>
+            <span className="uv-info">{item.wallet.venmoAccount}</span>
+          </div>
+
           <div className="uv-group-info">
             <span className="uv-label">Balance</span>
             <span className="uv-info">{item.wallet.balance}</span>

@@ -15,6 +15,7 @@ class UserEdit extends Component {
     school: '',
     balance: '',
     paypalAccount: '',
+    venmoAccount: '',
     requestStatus: '',
     state: '',
     city: '',
@@ -39,6 +40,7 @@ class UserEdit extends Component {
       school: user.school || '',
       balance: user.wallet.balance || '',
       paypalAccount: user.wallet.paypalAccount || '',
+      venmoAccount: user.wallet.venmoAccount || '',
       requestStatus: user.wallet.status,
       state: user.address.state || '',
       city: user.address.city || '',
@@ -191,6 +193,21 @@ class UserEdit extends Component {
                   fluid
                   value={this.state.paypalAccount}
                   placeholder='Paypal Account' />
+              </span>
+            </div>
+          </div>
+          <div className="ue-body">
+            <div className="ue-item">
+              <span className="ue-label">
+                Venmo Account
+              </span>
+              <span className="ue-info">
+                <Input
+                  name='venmoAccount'
+                  onChange={this.handleInputChange}
+                  fluid
+                  value={this.state.venmoAccount}
+                  placeholder='Venmo Account' />
               </span>
             </div>
           </div>
