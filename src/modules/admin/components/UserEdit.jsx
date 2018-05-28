@@ -82,7 +82,7 @@ class UserEdit extends Component {
         size='tiny'
         open={this.props.openModal}
         onClose={this.props.toggleModal}
-        style={{marginTop: '5%', margin: '5% auto'}}
+        style={{marginTop: '1%', margin: '1% auto'}}
       >
         <Modal.Header>
           Edit Profile
